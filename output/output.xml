@@ -1,0 +1,2407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on linux)" generated="20220625 15:47:02.573" rpa="false" schemaversion="3">
+<suite id="s1" name="Nexign homework" source="/home/neuro/PycharmProjects/Nexign_homework">
+<suite id="s1-s1" name="RF2" source="/home/neuro/PycharmProjects/Nexign_homework/RF2">
+<suite id="s1-s1-s1" name="Ddt" source="/home/neuro/PycharmProjects/Nexign_homework/RF2/ddt.robot">
+<kw name="Suite Setup" library="resource" type="SETUP">
+<msg timestamp="20220625 15:47:02.826" level="TRACE">Arguments: [  ]</msg>
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220625 15:47:02.827" level="TRACE">Arguments: [ 'alias' | 'http://localhost:3000' ]</msg>
+<msg timestamp="20220625 15:47:02.827" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20220625 15:47:02.827" level="DEBUG">Creating session: alias</msg>
+<msg timestamp="20220625 15:47:02.827" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7f7df1da3c10&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.827" endtime="20220625 15:47:02.827"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<msg timestamp="20220625 15:47:02.827" level="TRACE">Arguments: [ 'app_db' | 'app_user' | 'password' | 'localhost' | '5432' ]</msg>
+<msg timestamp="20220625 15:47:02.827" level="DEBUG">Connecting using : dbhost=localhost, dbport=5432, dbname=app_db, dbusername=app_user, dbpassword=password, alias=None</msg>
+<msg timestamp="20220625 15:47:02.834" level="TRACE">Return: 1</msg>
+<status status="PASS" starttime="20220625 15:47:02.827" endtime="20220625 15:47:02.834"/>
+</kw>
+<msg timestamp="20220625 15:47:02.835" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.826" endtime="20220625 15:47:02.835"/>
+</kw>
+<test id="s1-s1-s1-t1" name="Check Search One Table 200" line="8">
+<kw name="Get And Check Response">
+<arg>customers</arg>
+<arg>age=lt.21&amp;state=eq.SD</arg>
+<arg>200</arg>
+<msg timestamp="20220625 15:47:02.836" level="TRACE">Arguments: [ ${table}='customers' | ${params}='age=lt.21&amp;state=eq.SD' | ${expected result}='200' | ${message}='‘’' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=${expected result}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:02.836" level="TRACE">Arguments: [ 'alias' | '/customers?' | params='age=lt.21&amp;state=eq.SD' | expected_status='200' ]</msg>
+<msg timestamp="20220625 15:47:02.838" level="DEBUG">Starting new HTTP connection (1): localhost:3000</msg>
+<msg timestamp="20220625 15:47:02.852" level="DEBUG">http://localhost:3000 "GET /customers?age=lt.21&amp;state=eq.SD HTTP/1.1" 200 None</msg>
+<msg timestamp="20220625 15:47:02.853" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ path_url=/customers?age=lt.21&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:02.853" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-11/*', 'Content-Location': '/customers?age=lt.21&amp;state=eq.SD', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"customerid":430,"firstname":"SADBYE","lastname":"LQFAMCRRWU","address1":"2815718090 Dell Way","address2":"\\N","city":"MCKVQYH","state":"SD","zip":14548,"country":"US","region":1,"email":"LQFAMCRRWU@dell.com","phone":"2815718090","creditcardtype":4,"creditcard":"7.00995E+15","creditcardexpiration":"2009/12","username":"user430","password":"password","age":19,"income":20000,"gender":"M"}, 
+ {"customerid":1620,"firstname":"MWBVRV","lastname":"JSPQUHRHNQ","address1":"5927176243 Dell Way","address2":"\\N","city":"YRIMDVC","state":"SD","zip":92018,"country":"US","region":1,"email":"JSPQUHRHNQ@dell.com","phone":"5927176243","creditcardtype":3,"creditcard":"8.86601E+15","creditcardexpiration":"2009/10","username":"user1620","password":"password","age":20,"income":80000,"gender":"M"}, 
+ {"customerid":1902,"firstname":"CXUBFK","lastname":"APXYQPXOPS","address1":"9932233930 Dell Way","address2":"\\N","city":"IWHUFST","state":"SD","zip":46577,"country":"US","region":1,"email":"APXYQPXOPS@dell.com","phone":"9932233930","creditcardtype":4,"creditcard":"3.59669E+15","creditcardexpiration":"2009/06","username":"user1902","password":"password","age":20,"income":60000,"gender":"F"}, 
+ {"customerid":2388,"firstname":"YLHKWR","lastname":"ZWVATZIHSZ","address1":"9018806393 Dell Way","address2":"\\N","city":"NFGANML","state":"SD","zip":27968,"country":"US","region":1,"email":"ZWVATZIHSZ@dell.com","phone":"9018806393","creditcardtype":5,"creditcard":"7.36411E+15","creditcardexpiration":"2009/05","username":"user2388","password":"password","age":18,"income":40000,"gender":"M"}, 
+ {"customerid":4092,"firstname":"NWGZHZ","lastname":"SXKCUISAYM","address1":"2454639426 Dell Way","address2":"\\N","city":"VVRAJTG","state":"SD","zip":94876,"country":"US","region":1,"email":"SXKCUISAYM@dell.com","phone":"2454639426","creditcardtype":1,"creditcard":"2.54479E+15","creditcardexpiration":"2009/06","username":"user4092","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":5456,"firstname":"QYLUXC","lastname":"KZJQHEYBZN","address1":"7869868251 Dell Way","address2":"\\N","city":"AQBGHYF","state":"SD","zip":57173,"country":"US","region":1,"email":"KZJQHEYBZN@dell.com","phone":"7869868251","creditcardtype":1,"creditcard":"6.62925E+15","creditcardexpiration":"2011/01","username":"user5456","password":"password","age":20,"income":40000,"gender":"F"}, 
+ {"customerid":5490,"firstname":"YSLZYD","lastname":"EWSAPICKKO","address1":"2610554455 Dell Way","address2":"\\N","city":"CYOLTSZ","state":"SD","zip":46821,"country":"US","region":1,"email":"EWSAPICKKO@dell.com","phone":"2610554455","creditcardtype":1,"creditcard":"9.77978E+15","creditcardexpiration":"2010/09","username":"user5490","password":"password","age":19,"income":60000,"gender":"F"}, 
+ {"customerid":6443,"firstname":"WJMFYA","lastname":"PECYSELKTZ","address1":"3711128852 Dell Way","address2":"\\N","city":"ZHJGKJQ","state":"SD","zip":94247,"country":"US","region":1,"email":"PECYSELKTZ@dell.com","phone":"3711128852","creditcardtype":5,"creditcard":"4.02913E+15","creditcardexpiration":"2012/10","username":"user6443","password":"password","age":19,"income":100000,"gender":"F"}, 
+ {"customerid":7340,"firstname":"OQMUAV","lastname":"VHKACPCMGV","address1":"1166718371 Dell Way","address2":"\\N","city":"UTKEZEW","state":"SD","zip":88021,"country":"US","region":1,"email":"VHKACPCMGV@dell.com","phone":"1166718371","creditcardtype":1,"creditcard":"8.81066E+15","creditcardexpiration":"2009/12","username":"user7340","password":"password","age":19,"income":100000,"gender":"M"}, 
+ {"customerid":8507,"firstname":"PUMLTB","lastname":"UISNUVEPAT","address1":"8134042856 Dell Way","address2":"\\N","city":"WJDLUCQ","state":"SD","zip":33323,"country":"US","region":1,"email":"UISNUVEPAT@dell.com","phone":"8134042856","creditcardtype":2,"creditcard":"9.82469E+15","creditcardexpiration":"2008/01","username":"user8507","password":"password","age":19,"income":80000,"gender":"M"}, 
+ {"customerid":8759,"firstname":"AUZITM","lastname":"BPHXCGRCAL","address1":"8515647409 Dell Way","address2":"\\N","city":"OVMFHJL","state":"SD","zip":61018,"country":"US","region":1,"email":"BPHXCGRCAL@dell.com","phone":"8515647409","creditcardtype":5,"creditcard":"2.00792E+15","creditcardexpiration":"2011/04","username":"user8759","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":9527,"firstname":"XTUEKT","lastname":"EAPTUWLGIM","address1":"9690323248 Dell Way","address2":"\\N","city":"TTYADUC","state":"SD","zip":51169,"country":"US","region":1,"email":"EAPTUWLGIM@dell.com","phone":"9690323248","creditcardtype":4,"creditcard":"8.30594E+15","creditcardexpiration":"2011/05","username":"user9527","password":"password","age":20,"income":80000,"gender":"F"}] 
+ </msg>
+<msg timestamp="20220625 15:47:02.853" level="TRACE">Return: &lt;Response [200]&gt;</msg>
+<msg timestamp="20220625 15:47:02.853" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.836" endtime="20220625 15:47:02.853"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${expected result} != 200</arg>
+<arg>should contain</arg>
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20220625 15:47:02.853" level="TRACE">Arguments: [ '200 != 200' | 'should contain' | '${response.json()}[message]' | '${message}' ]</msg>
+<msg timestamp="20220625 15:47:02.853" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.853" endtime="20220625 15:47:02.853"/>
+</kw>
+<msg timestamp="20220625 15:47:02.854" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.836" endtime="20220625 15:47:02.854"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.835" endtime="20220625 15:47:02.854"/>
+</test>
+<test id="s1-s1-s1-t2" name="Check Search One Table 404" line="9">
+<kw name="Get And Check Response">
+<arg>cstomers</arg>
+<arg>age=lt.21&amp;state=eq.SD</arg>
+<arg>404</arg>
+<arg>does not exist</arg>
+<msg timestamp="20220625 15:47:02.855" level="TRACE">Arguments: [ ${table}='cstomers' | ${params}='age=lt.21&amp;state=eq.SD' | ${expected result}='404' | ${message}='does not exist' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=${expected result}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:02.855" level="TRACE">Arguments: [ 'alias' | '/cstomers?' | params='age=lt.21&amp;state=eq.SD' | expected_status='404' ]</msg>
+<msg timestamp="20220625 15:47:02.858" level="DEBUG">http://localhost:3000 "GET /cstomers?age=lt.21&amp;state=eq.SD HTTP/1.1" 404 None</msg>
+<msg timestamp="20220625 15:47:02.858" level="INFO">GET Request : url=http://localhost:3000/cstomers?age=lt.21&amp;state=eq.SD 
+ path_url=/cstomers?age=lt.21&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:02.858" level="INFO">GET Response : url=http://localhost:3000/cstomers?age=lt.21&amp;state=eq.SD 
+ status=404, reason=Not Found 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"hint":null,"details":null,"code":"42P01","message":"relation \"public.cstomers\" does not exist"} 
+ </msg>
+<msg timestamp="20220625 15:47:02.858" level="TRACE">Return: &lt;Response [404]&gt;</msg>
+<msg timestamp="20220625 15:47:02.858" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.855" endtime="20220625 15:47:02.858"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${expected result} != 200</arg>
+<arg>should contain</arg>
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20220625 15:47:02.858" level="TRACE">Arguments: [ '404 != 200' | 'should contain' | '${response.json()}[message]' | '${message}' ]</msg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220625 15:47:02.859" level="TRACE">Arguments: [ 'relation "public.cstomers" does not exist' | 'does not exist' ]</msg>
+<msg timestamp="20220625 15:47:02.859" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.859" endtime="20220625 15:47:02.859"/>
+</kw>
+<msg timestamp="20220625 15:47:02.859" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.858" endtime="20220625 15:47:02.859"/>
+</kw>
+<msg timestamp="20220625 15:47:02.859" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.854" endtime="20220625 15:47:02.860"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.854" endtime="20220625 15:47:02.860"/>
+</test>
+<test id="s1-s1-s1-t3" name="Check Search One Table 400" line="10">
+<kw name="Get And Check Response">
+<arg>customers</arg>
+<arg>age=lt.21&amp;state=SD</arg>
+<arg>400</arg>
+<arg>failed to parse filter</arg>
+<msg timestamp="20220625 15:47:02.860" level="TRACE">Arguments: [ ${table}='customers' | ${params}='age=lt.21&amp;state=SD' | ${expected result}='400' | ${message}='failed to parse filter' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=${expected result}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:02.861" level="TRACE">Arguments: [ 'alias' | '/customers?' | params='age=lt.21&amp;state=SD' | expected_status='400' ]</msg>
+<msg timestamp="20220625 15:47:02.863" level="DEBUG">http://localhost:3000 "GET /customers?age=lt.21&amp;state=SD HTTP/1.1" 400 None</msg>
+<msg timestamp="20220625 15:47:02.863" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.21&amp;state=SD 
+ path_url=/customers?age=lt.21&amp;state=SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:02.863" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.21&amp;state=SD 
+ status=400, reason=Bad Request 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"details":"unexpected \"S\" expecting \"not\" or operator (eq, gt, ...)","message":"\"failed to parse filter (SD)\" (line 1, column 1)"} 
+ </msg>
+<msg timestamp="20220625 15:47:02.863" level="TRACE">Return: &lt;Response [400]&gt;</msg>
+<msg timestamp="20220625 15:47:02.863" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.861" endtime="20220625 15:47:02.863"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${expected result} != 200</arg>
+<arg>should contain</arg>
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20220625 15:47:02.864" level="TRACE">Arguments: [ '400 != 200' | 'should contain' | '${response.json()}[message]' | '${message}' ]</msg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220625 15:47:02.864" level="TRACE">Arguments: [ '"failed to parse filter (SD)" (line 1, column 1)' | 'failed to parse filter' ]</msg>
+<msg timestamp="20220625 15:47:02.864" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.864" endtime="20220625 15:47:02.864"/>
+</kw>
+<msg timestamp="20220625 15:47:02.864" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.863" endtime="20220625 15:47:02.864"/>
+</kw>
+<msg timestamp="20220625 15:47:02.865" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.860" endtime="20220625 15:47:02.865"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.860" endtime="20220625 15:47:02.865"/>
+</test>
+<test id="s1-s1-s1-t4" name="Check Search One Table 400" line="11">
+<kw name="Get And Check Response">
+<arg>customers</arg>
+<arg>age=lt.gt&amp;state=eq.SD</arg>
+<arg>400</arg>
+<arg>invalid input syntax</arg>
+<msg timestamp="20220625 15:47:02.866" level="TRACE">Arguments: [ ${table}='customers' | ${params}='age=lt.gt&amp;state=eq.SD' | ${expected result}='400' | ${message}='invalid input syntax' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${response}</var>
+<arg>alias</arg>
+<arg>/${table}?</arg>
+<arg>params=${params}</arg>
+<arg>expected_status=${expected result}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:02.866" level="TRACE">Arguments: [ 'alias' | '/customers?' | params='age=lt.gt&amp;state=eq.SD' | expected_status='400' ]</msg>
+<msg timestamp="20220625 15:47:02.869" level="DEBUG">http://localhost:3000 "GET /customers?age=lt.gt&amp;state=eq.SD HTTP/1.1" 400 None</msg>
+<msg timestamp="20220625 15:47:02.869" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.gt&amp;state=eq.SD 
+ path_url=/customers?age=lt.gt&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:02.869" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.gt&amp;state=eq.SD 
+ status=400, reason=Bad Request 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"hint":null,"details":null,"code":"22P02","message":"invalid input syntax for type smallint: \"gt\""} 
+ </msg>
+<msg timestamp="20220625 15:47:02.869" level="TRACE">Return: &lt;Response [400]&gt;</msg>
+<msg timestamp="20220625 15:47:02.869" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.866" endtime="20220625 15:47:02.869"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${expected result} != 200</arg>
+<arg>should contain</arg>
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20220625 15:47:02.870" level="TRACE">Arguments: [ '400 != 200' | 'should contain' | '${response.json()}[message]' | '${message}' ]</msg>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()}[message]</arg>
+<arg>${message}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<msg timestamp="20220625 15:47:02.873" level="TRACE">Arguments: [ 'invalid input syntax for type smallint: "gt"' | 'invalid input syntax' ]</msg>
+<msg timestamp="20220625 15:47:02.873" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.870" endtime="20220625 15:47:02.873"/>
+</kw>
+<msg timestamp="20220625 15:47:02.873" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.870" endtime="20220625 15:47:02.873"/>
+</kw>
+<msg timestamp="20220625 15:47:02.873" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.865" endtime="20220625 15:47:02.873"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.865" endtime="20220625 15:47:02.873"/>
+</test>
+<kw name="Suite Teardown" library="resource" type="TEARDOWN">
+<msg timestamp="20220625 15:47:02.874" level="TRACE">Arguments: [  ]</msg>
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220625 15:47:02.874" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.874" level="INFO">Deleting All Sessions</msg>
+<msg timestamp="20220625 15:47:02.874" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.874" endtime="20220625 15:47:02.874"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<msg timestamp="20220625 15:47:02.874" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.875" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.874" endtime="20220625 15:47:02.875"/>
+</kw>
+<msg timestamp="20220625 15:47:02.875" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.874" endtime="20220625 15:47:02.875"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.592" endtime="20220625 15:47:02.875"/>
+</suite>
+<suite id="s1-s1-s2" name="Hw 2(1)" source="/home/neuro/PycharmProjects/Nexign_homework/RF2/hw_2(1).robot">
+<kw name="Suite Setup" library="resource" type="SETUP">
+<msg timestamp="20220625 15:47:02.880" level="TRACE">Arguments: [  ]</msg>
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220625 15:47:02.880" level="TRACE">Arguments: [ 'alias' | 'http://localhost:3000' ]</msg>
+<msg timestamp="20220625 15:47:02.881" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20220625 15:47:02.881" level="DEBUG">Creating session: alias</msg>
+<msg timestamp="20220625 15:47:02.881" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7f7df1da34f0&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.880" endtime="20220625 15:47:02.881"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<msg timestamp="20220625 15:47:02.881" level="TRACE">Arguments: [ 'app_db' | 'app_user' | 'password' | 'localhost' | '5432' ]</msg>
+<msg timestamp="20220625 15:47:02.881" level="DEBUG">Connecting using : dbhost=localhost, dbport=5432, dbname=app_db, dbusername=app_user, dbpassword=password, alias=None</msg>
+<msg timestamp="20220625 15:47:02.887" level="TRACE">Return: 2</msg>
+<status status="PASS" starttime="20220625 15:47:02.881" endtime="20220625 15:47:02.888"/>
+</kw>
+<msg timestamp="20220625 15:47:02.888" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.880" endtime="20220625 15:47:02.888"/>
+</kw>
+<test id="s1-s1-s2-t1" name="Check Order ID By Order Date And Total Amount" line="13">
+<kw name="Get Order Date and Total Amount From PostRest">
+<var>${orderid}</var>
+<var>${orderdate}</var>
+<var>${totalamount}</var>
+<arg>arguments=totalamount=gt.300&amp;orderdate=eq.2004-01-01</arg>
+<msg timestamp="20220625 15:47:02.889" level="TRACE">Arguments: [ ${arguments}='totalamount=gt.300&amp;orderdate=eq.2004-01-01' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${resp}</var>
+<arg>alias</arg>
+<arg>/orders?</arg>
+<arg>params=${arguments}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:02.889" level="TRACE">Arguments: [ 'alias' | '/orders?' | params='totalamount=gt.300&amp;orderdate=eq.2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.890" level="DEBUG">Starting new HTTP connection (1): localhost:3000</msg>
+<msg timestamp="20220625 15:47:02.894" level="DEBUG">http://localhost:3000 "GET /orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 HTTP/1.1" 200 None</msg>
+<msg timestamp="20220625 15:47:02.894" level="INFO">GET Request : url=http://localhost:3000/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ path_url=/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:02.894" level="INFO">GET Response : url=http://localhost:3000/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-4/*', 'Content-Location': '/orders?orderdate=eq.2004-01-01&amp;totalamount=gt.300', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"orderid":295,"orderdate":"2004-01-01","customerid":3099,"netamount":361.87,"tax":29.85,"totalamount":391.72}, 
+ {"orderid":305,"orderdate":"2004-01-01","customerid":17738,"netamount":397.26,"tax":32.77,"totalamount":430.03}, 
+ {"orderid":447,"orderdate":"2004-01-01","customerid":19381,"netamount":313.55,"tax":25.87,"totalamount":339.42}, 
+ {"orderid":515,"orderdate":"2004-01-01","customerid":2323,"netamount":395.80,"tax":32.65,"totalamount":428.45}, 
+ {"orderid":709,"orderdate":"2004-01-01","customerid":1595,"netamount":392.67,"tax":32.40,"totalamount":425.07}] 
+ </msg>
+<msg timestamp="20220625 15:47:02.894" level="TRACE">Return: &lt;Response [200]&gt;</msg>
+<msg timestamp="20220625 15:47:02.894" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.889" endtime="20220625 15:47:02.894"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${orderid}</var>
+<arg>${resp.json()}</arg>
+<arg>$..orderid</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:02.895" level="TRACE">Arguments: [ [{'customerid': 3099,
+  'netamount': 361.87,
+  'orderdate': '2004-01-01',
+  'orderid': 295,
+  'tax': 29.85,
+  'totalamount': 391.72},
+ {'customerid': 17738,
+  'netamount': 397.26,
+  'orderdate': '2004-01-01',
+  'orderid': 305,
+  'tax': 32.77,
+  'totalamount': 430.03},
+ {'customerid': 19381,
+  'netamount': 313.55,
+  'orderdate': '2004-01-01',
+  'orderid': 447,
+  'tax': 25.87,
+  'totalamount': 339.42},
+ {'customerid': 2323,
+  'netamount': 395.8,
+  'orderdate': '2004-01-01',
+  'orderid': 515,
+  'tax': 32.65,
+  'totalamount': 428.45},
+ {'customerid': 1595,
+  'netamount': 392.67,
+  'orderdate': '2004-01-01',
+  'orderid': 709,
+  'tax': 32.4,
+  'totalamount': 425.07}] | '$..orderid' ]</msg>
+<msg timestamp="20220625 15:47:02.915" level="TRACE">Return: [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 15:47:02.915" level="INFO">${orderid} = [295, 305, 447, 515, 709]</msg>
+<status status="PASS" starttime="20220625 15:47:02.895" endtime="20220625 15:47:02.915"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${orderdate}</var>
+<arg>${resp.json()}</arg>
+<arg>$..orderdate</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:02.916" level="TRACE">Arguments: [ [{'customerid': 3099,
+  'netamount': 361.87,
+  'orderdate': '2004-01-01',
+  'orderid': 295,
+  'tax': 29.85,
+  'totalamount': 391.72},
+ {'customerid': 17738,
+  'netamount': 397.26,
+  'orderdate': '2004-01-01',
+  'orderid': 305,
+  'tax': 32.77,
+  'totalamount': 430.03},
+ {'customerid': 19381,
+  'netamount': 313.55,
+  'orderdate': '2004-01-01',
+  'orderid': 447,
+  'tax': 25.87,
+  'totalamount': 339.42},
+ {'customerid': 2323,
+  'netamount': 395.8,
+  'orderdate': '2004-01-01',
+  'orderid': 515,
+  'tax': 32.65,
+  'totalamount': 428.45},
+ {'customerid': 1595,
+  'netamount': 392.67,
+  'orderdate': '2004-01-01',
+  'orderid': 709,
+  'tax': 32.4,
+  'totalamount': 425.07}] | '$..orderdate' ]</msg>
+<msg timestamp="20220625 15:47:02.933" level="TRACE">Return: ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<msg timestamp="20220625 15:47:02.934" level="INFO">${orderdate} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<status status="PASS" starttime="20220625 15:47:02.915" endtime="20220625 15:47:02.934"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${totalamount}</var>
+<arg>${resp.json()}</arg>
+<arg>$..totalamount</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:02.934" level="TRACE">Arguments: [ [{'customerid': 3099,
+  'netamount': 361.87,
+  'orderdate': '2004-01-01',
+  'orderid': 295,
+  'tax': 29.85,
+  'totalamount': 391.72},
+ {'customerid': 17738,
+  'netamount': 397.26,
+  'orderdate': '2004-01-01',
+  'orderid': 305,
+  'tax': 32.77,
+  'totalamount': 430.03},
+ {'customerid': 19381,
+  'netamount': 313.55,
+  'orderdate': '2004-01-01',
+  'orderid': 447,
+  'tax': 25.87,
+  'totalamount': 339.42},
+ {'customerid': 2323,
+  'netamount': 395.8,
+  'orderdate': '2004-01-01',
+  'orderid': 515,
+  'tax': 32.65,
+  'totalamount': 428.45},
+ {'customerid': 1595,
+  'netamount': 392.67,
+  'orderdate': '2004-01-01',
+  'orderid': 709,
+  'tax': 32.4,
+  'totalamount': 425.07}] | '$..totalamount' ]</msg>
+<msg timestamp="20220625 15:47:02.950" level="TRACE">Return: [391.72, 430.03, 339.42, 428.45, 425.07]</msg>
+<msg timestamp="20220625 15:47:02.950" level="INFO">${totalamount} = [391.72, 430.03, 339.42, 428.45, 425.07]</msg>
+<status status="PASS" starttime="20220625 15:47:02.934" endtime="20220625 15:47:02.950"/>
+</kw>
+<msg timestamp="20220625 15:47:02.951" level="TRACE">Return: [[295, 305, 447, 515, 709],
+ ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01'],
+ [391.72, 430.03, 339.42, 428.45, 425.07]]</msg>
+<msg timestamp="20220625 15:47:02.951" level="INFO">${orderid} = [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 15:47:02.951" level="INFO">${orderdate} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<msg timestamp="20220625 15:47:02.951" level="INFO">${totalamount} = [391.72, 430.03, 339.42, 428.45, 425.07]</msg>
+<status status="PASS" starttime="20220625 15:47:02.888" endtime="20220625 15:47:02.951"/>
+</kw>
+<kw name="Get Order Date and Total Amount From DB">
+<var>@{result}</var>
+<arg>totalamount=300</arg>
+<arg>orderdate=2004-01-01</arg>
+<msg timestamp="20220625 15:47:02.951" level="TRACE">Arguments: [ &amp;{args}={'orderdate': '2004-01-01', 'totalamount': '300'} ]</msg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${params}</var>
+<arg>&amp;{args}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220625 15:47:02.951" level="TRACE">Arguments: [ '&amp;{args}' ]</msg>
+<msg timestamp="20220625 15:47:02.952" level="TRACE">Return: {'orderdate': '2004-01-01', 'totalamount': '300'}</msg>
+<msg timestamp="20220625 15:47:02.952" level="INFO">${params} = {'totalamount': '300', 'orderdate': '2004-01-01'}</msg>
+<status status="PASS" starttime="20220625 15:47:02.951" endtime="20220625 15:47:02.952"/>
+</kw>
+<kw name="Execute Sql String Mapped" library="DB">
+<var>@{result}</var>
+<arg>${SQL_orders}</arg>
+<arg>&amp;{params}</arg>
+<doc>SQL query execution where each result row is mapped as a dict with column names as keys.</doc>
+<msg timestamp="20220625 15:47:02.952" level="TRACE">Arguments: [ 'SELECT orderid, orderdate, totalamount FROM "orders" WHERE totalamount&gt;%(totalamount)s AND orderdate=%(orderdate)s' | totalamount='300' | orderdate='2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.952" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT orderid, orderdate, totalamount FROM &amp;quot;orders&amp;quot; WHERE totalamount&amp;gt;%(totalamount)s AND orderdate=%(orderdate)s&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:02.955" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;orderid&amp;#x27;: 295, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;391.72&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 305, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;430.03&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 447, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;339.42&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 515, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;428.45&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 709, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;425.07&amp;#x27;)}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:02.955" level="TRACE">Return: [{'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 295,
+  'totalamount': Decimal('391.72')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 305,
+  'totalamount': Decimal('430.03')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 447,
+  'totalamount': Decimal('339.42')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 515,
+  'totalamount': Decimal('428.45')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 709,
+  'totalamount': Decimal('425.07')}]</msg>
+<msg timestamp="20220625 15:47:02.956" level="INFO">@{result} = [ {'orderid': 295, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('391.72')} | {'orderid': 305, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('430.03')} | {'orderid': ...</msg>
+<status status="PASS" starttime="20220625 15:47:02.952" endtime="20220625 15:47:02.956"/>
+</kw>
+<msg timestamp="20220625 15:47:02.956" level="TRACE">Return: [{'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 295,
+  'totalamount': Decimal('391.72')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 305,
+  'totalamount': Decimal('430.03')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 447,
+  'totalamount': Decimal('339.42')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 515,
+  'totalamount': Decimal('428.45')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 709,
+  'totalamount': Decimal('425.07')}]</msg>
+<msg timestamp="20220625 15:47:02.956" level="INFO">@{result} = [ {'orderid': 295, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('391.72')} | {'orderid': 305, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('430.03')} | {'orderid': ...</msg>
+<status status="PASS" starttime="20220625 15:47:02.951" endtime="20220625 15:47:02.956"/>
+</kw>
+<kw name="Compare Order Date and Order ID From PostRest And DB">
+<arg>${result}</arg>
+<arg>${orderdate}</arg>
+<arg>${orderid}</arg>
+<msg timestamp="20220625 15:47:02.957" level="TRACE">Arguments: [ ${results_db}=[{'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 295,
+  'totalamount': Decimal('391.72')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 305,
+  'totalamount': Decimal('430.03')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 447,
+  'totalamount': Decimal('339.42')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 515,
+  'totalamount': Decimal('428.45')},
+ {'orderdate': datetime.date(2004, 1, 1),
+  'orderid': 709,
+  'totalamount': Decimal('425.07')}] | ${orderdates}=['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01'] | ${orderids}=[295, 305, 447, 515, 709] ]</msg>
+<kw name="Create List" library="BuiltIn">
+<var>${orderdates_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220625 15:47:02.957" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.957" level="TRACE">Return: []</msg>
+<msg timestamp="20220625 15:47:02.958" level="INFO">${orderdates_db} = []</msg>
+<status status="PASS" starttime="20220625 15:47:02.957" endtime="20220625 15:47:02.958"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${orderids_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220625 15:47:02.958" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.958" level="TRACE">Return: []</msg>
+<msg timestamp="20220625 15:47:02.958" level="INFO">${orderids_db} = []</msg>
+<status status="PASS" starttime="20220625 15:47:02.958" endtime="20220625 15:47:02.958"/>
+</kw>
+<for flavor="IN">
+<var>${k}</var>
+<value>@{results_db}</value>
+<iter>
+<var name="${k}">{'orderid': 295, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('391.72')}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[orderid]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:02.958" level="TRACE">Arguments: [ 295 ]</msg>
+<msg timestamp="20220625 15:47:02.958" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:02.958" level="TRACE">Return: 295.0</msg>
+<msg timestamp="20220625 15:47:02.958" level="INFO">${k2} = 295.0</msg>
+<status status="PASS" starttime="20220625 15:47:02.958" endtime="20220625 15:47:02.958"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${k3}</var>
+<arg>${k}[orderdate]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Arguments: [ datetime.date(2004, 1, 1) ]</msg>
+<msg timestamp="20220625 15:47:02.959" level="DEBUG">Argument types are:
+&lt;class 'datetime.date'&gt;</msg>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Return: '2004-01-01'</msg>
+<msg timestamp="20220625 15:47:02.959" level="INFO">${k3} = 2004-01-01</msg>
+<status status="PASS" starttime="20220625 15:47:02.959" endtime="20220625 15:47:02.959"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderdates_db}</arg>
+<arg>${k3}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Arguments: [ [] | '2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.959" endtime="20220625 15:47:02.959"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderids_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Arguments: [ [] | 295.0 ]</msg>
+<msg timestamp="20220625 15:47:02.959" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.959" endtime="20220625 15:47:02.960"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.958" endtime="20220625 15:47:02.960"/>
+</iter>
+<iter>
+<var name="${k}">{'orderid': 305, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('430.03')}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[orderid]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:02.960" level="TRACE">Arguments: [ 305 ]</msg>
+<msg timestamp="20220625 15:47:02.960" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:02.960" level="TRACE">Return: 305.0</msg>
+<msg timestamp="20220625 15:47:02.960" level="INFO">${k2} = 305.0</msg>
+<status status="PASS" starttime="20220625 15:47:02.960" endtime="20220625 15:47:02.960"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${k3}</var>
+<arg>${k}[orderdate]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220625 15:47:02.960" level="TRACE">Arguments: [ datetime.date(2004, 1, 1) ]</msg>
+<msg timestamp="20220625 15:47:02.960" level="DEBUG">Argument types are:
+&lt;class 'datetime.date'&gt;</msg>
+<msg timestamp="20220625 15:47:02.960" level="TRACE">Return: '2004-01-01'</msg>
+<msg timestamp="20220625 15:47:02.960" level="INFO">${k3} = 2004-01-01</msg>
+<status status="PASS" starttime="20220625 15:47:02.960" endtime="20220625 15:47:02.960"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderdates_db}</arg>
+<arg>${k3}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Arguments: [ ['2004-01-01'] | '2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.960" endtime="20220625 15:47:02.961"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderids_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Arguments: [ [295.0] | 305.0 ]</msg>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.961" endtime="20220625 15:47:02.961"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.960" endtime="20220625 15:47:02.961"/>
+</iter>
+<iter>
+<var name="${k}">{'orderid': 447, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('339.42')}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[orderid]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Arguments: [ 447 ]</msg>
+<msg timestamp="20220625 15:47:02.961" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:02.961" level="TRACE">Return: 447.0</msg>
+<msg timestamp="20220625 15:47:02.961" level="INFO">${k2} = 447.0</msg>
+<status status="PASS" starttime="20220625 15:47:02.961" endtime="20220625 15:47:02.961"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${k3}</var>
+<arg>${k}[orderdate]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Arguments: [ datetime.date(2004, 1, 1) ]</msg>
+<msg timestamp="20220625 15:47:02.962" level="DEBUG">Argument types are:
+&lt;class 'datetime.date'&gt;</msg>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Return: '2004-01-01'</msg>
+<msg timestamp="20220625 15:47:02.962" level="INFO">${k3} = 2004-01-01</msg>
+<status status="PASS" starttime="20220625 15:47:02.962" endtime="20220625 15:47:02.962"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderdates_db}</arg>
+<arg>${k3}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Arguments: [ ['2004-01-01', '2004-01-01'] | '2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.962" endtime="20220625 15:47:02.962"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderids_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Arguments: [ [295.0, 305.0] | 447.0 ]</msg>
+<msg timestamp="20220625 15:47:02.962" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.962" endtime="20220625 15:47:02.963"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.961" endtime="20220625 15:47:02.963"/>
+</iter>
+<iter>
+<var name="${k}">{'orderid': 515, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('428.45')}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[orderid]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:02.963" level="TRACE">Arguments: [ 515 ]</msg>
+<msg timestamp="20220625 15:47:02.963" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:02.963" level="TRACE">Return: 515.0</msg>
+<msg timestamp="20220625 15:47:02.963" level="INFO">${k2} = 515.0</msg>
+<status status="PASS" starttime="20220625 15:47:02.963" endtime="20220625 15:47:02.963"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${k3}</var>
+<arg>${k}[orderdate]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220625 15:47:02.963" level="TRACE">Arguments: [ datetime.date(2004, 1, 1) ]</msg>
+<msg timestamp="20220625 15:47:02.963" level="DEBUG">Argument types are:
+&lt;class 'datetime.date'&gt;</msg>
+<msg timestamp="20220625 15:47:02.963" level="TRACE">Return: '2004-01-01'</msg>
+<msg timestamp="20220625 15:47:02.963" level="INFO">${k3} = 2004-01-01</msg>
+<status status="PASS" starttime="20220625 15:47:02.963" endtime="20220625 15:47:02.963"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderdates_db}</arg>
+<arg>${k3}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.964" level="TRACE">Arguments: [ ['2004-01-01', '2004-01-01', '2004-01-01'] | '2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.964" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.964" endtime="20220625 15:47:02.964"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderids_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.964" level="TRACE">Arguments: [ [295.0, 305.0, 447.0] | 515.0 ]</msg>
+<msg timestamp="20220625 15:47:02.964" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.964" endtime="20220625 15:47:02.964"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.963" endtime="20220625 15:47:02.964"/>
+</iter>
+<iter>
+<var name="${k}">{'orderid': 709, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('425.07')}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[orderid]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:02.964" level="TRACE">Arguments: [ 709 ]</msg>
+<msg timestamp="20220625 15:47:02.964" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:02.965" level="TRACE">Return: 709.0</msg>
+<msg timestamp="20220625 15:47:02.965" level="INFO">${k2} = 709.0</msg>
+<status status="PASS" starttime="20220625 15:47:02.964" endtime="20220625 15:47:02.965"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${k3}</var>
+<arg>${k}[orderdate]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220625 15:47:02.965" level="TRACE">Arguments: [ datetime.date(2004, 1, 1) ]</msg>
+<msg timestamp="20220625 15:47:02.965" level="DEBUG">Argument types are:
+&lt;class 'datetime.date'&gt;</msg>
+<msg timestamp="20220625 15:47:02.965" level="TRACE">Return: '2004-01-01'</msg>
+<msg timestamp="20220625 15:47:02.965" level="INFO">${k3} = 2004-01-01</msg>
+<status status="PASS" starttime="20220625 15:47:02.965" endtime="20220625 15:47:02.965"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderdates_db}</arg>
+<arg>${k3}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.965" level="TRACE">Arguments: [ ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01'] | '2004-01-01' ]</msg>
+<msg timestamp="20220625 15:47:02.965" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.965" endtime="20220625 15:47:02.965"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${orderids_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Arguments: [ [295.0, 305.0, 447.0, 515.0] | 709.0 ]</msg>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.965" endtime="20220625 15:47:02.966"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.964" endtime="20220625 15:47:02.966"/>
+</iter>
+<status status="PASS" starttime="20220625 15:47:02.958" endtime="20220625 15:47:02.966"/>
+</for>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${orderids}</arg>
+<arg>${orderids_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Arguments: [ [295, 305, 447, 515, 709] | [295.0, 305.0, 447.0, 515.0, 709.0] ]</msg>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.966" endtime="20220625 15:47:02.966"/>
+</kw>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${orderdates}</arg>
+<arg>${orderdates_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Arguments: [ ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01'] | ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01'] ]</msg>
+<msg timestamp="20220625 15:47:02.966" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.966" endtime="20220625 15:47:02.966"/>
+</kw>
+<msg timestamp="20220625 15:47:02.967" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.956" endtime="20220625 15:47:02.967"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.888" endtime="20220625 15:47:02.967"/>
+</test>
+<kw name="Suite Teardown" library="resource" type="TEARDOWN">
+<msg timestamp="20220625 15:47:02.967" level="TRACE">Arguments: [  ]</msg>
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220625 15:47:02.967" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.968" level="INFO">Deleting All Sessions</msg>
+<msg timestamp="20220625 15:47:02.968" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.967" endtime="20220625 15:47:02.968"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<msg timestamp="20220625 15:47:02.968" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:02.968" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.968" endtime="20220625 15:47:02.968"/>
+</kw>
+<msg timestamp="20220625 15:47:02.968" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.967" endtime="20220625 15:47:02.968"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.876" endtime="20220625 15:47:02.968"/>
+</suite>
+<suite id="s1-s1-s3" name="Hw 2(2)" source="/home/neuro/PycharmProjects/Nexign_homework/RF2/hw_2(2).robot">
+<kw name="Suite Setup" library="resource" type="SETUP">
+<msg timestamp="20220625 15:47:02.973" level="TRACE">Arguments: [  ]</msg>
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220625 15:47:02.973" level="TRACE">Arguments: [ 'alias' | 'http://localhost:3000' ]</msg>
+<msg timestamp="20220625 15:47:02.973" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20220625 15:47:02.973" level="DEBUG">Creating session: alias</msg>
+<msg timestamp="20220625 15:47:02.973" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7f7df1c06040&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:02.973" endtime="20220625 15:47:02.973"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<msg timestamp="20220625 15:47:02.974" level="TRACE">Arguments: [ 'app_db' | 'app_user' | 'password' | 'localhost' | '5432' ]</msg>
+<msg timestamp="20220625 15:47:02.974" level="DEBUG">Connecting using : dbhost=localhost, dbport=5432, dbname=app_db, dbusername=app_user, dbpassword=password, alias=None</msg>
+<msg timestamp="20220625 15:47:02.980" level="TRACE">Return: 3</msg>
+<status status="PASS" starttime="20220625 15:47:02.973" endtime="20220625 15:47:02.980"/>
+</kw>
+<msg timestamp="20220625 15:47:02.980" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:02.973" endtime="20220625 15:47:02.980"/>
+</kw>
+<test id="s1-s1-s3-t1" name="Check Insert Into DB" line="12">
+<kw name="Insert Category to DB.Categories">
+<var>@{result_insert}</var>
+<arg>category=17</arg>
+<arg>categoryname=Smthng</arg>
+<msg timestamp="20220625 15:47:02.981" level="TRACE">Arguments: [ &amp;{args}={'category': '17', 'categoryname': 'Smthng'} ]</msg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${params}</var>
+<arg>&amp;{args}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220625 15:47:02.981" level="TRACE">Arguments: [ '&amp;{args}' ]</msg>
+<msg timestamp="20220625 15:47:02.981" level="TRACE">Return: {'category': '17', 'categoryname': 'Smthng'}</msg>
+<msg timestamp="20220625 15:47:02.981" level="INFO">${params} = {'category': '17', 'categoryname': 'Smthng'}</msg>
+<status status="PASS" starttime="20220625 15:47:02.981" endtime="20220625 15:47:02.981"/>
+</kw>
+<kw name="Execute Sql String Mapped" library="DB">
+<var>@{result}</var>
+<arg>${SQL_insert}</arg>
+<arg>&amp;{params}</arg>
+<doc>SQL query execution where each result row is mapped as a dict with column names as keys.</doc>
+<msg timestamp="20220625 15:47:02.982" level="TRACE">Arguments: [ 'BEGIN WORK; INSERT INTO categories VALUES (%(category)s, %(categoryname)s); COMMIT WORK; SELECT * FROM "categories";' | category='17' | categoryname='Smthng' ]</msg>
+<msg timestamp="20220625 15:47:02.982" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;BEGIN WORK; INSERT INTO categories VALUES (%(category)s, %(categoryname)s); COMMIT WORK; SELECT * FROM &amp;quot;categories&amp;quot;;&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.558" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;category&amp;#x27;: 1, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Action&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 2, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Animation&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 3, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Children&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 4, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Classics&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 5, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Comedy&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 6, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Documentary&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 7, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Drama&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 8, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Family&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 9, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Foreign&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 10, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Games&amp;#x27;}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.558" level="TRACE">Return: [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}]</msg>
+<msg timestamp="20220625 15:47:03.559" level="INFO">@{result} = [ {'category': 1, 'categoryname': 'Action'} | {'category': 2, 'categoryname': 'Animation'} | {'category': 3, 'categoryname': 'Children'} | {'category': 4, 'categoryname': 'Classics'} | {'category': 5,...</msg>
+<status status="PASS" starttime="20220625 15:47:02.982" endtime="20220625 15:47:03.559"/>
+</kw>
+<msg timestamp="20220625 15:47:03.559" level="TRACE">Return: [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}]</msg>
+<msg timestamp="20220625 15:47:03.560" level="INFO">@{result_insert} = [ {'category': 1, 'categoryname': 'Action'} | {'category': 2, 'categoryname': 'Animation'} | {'category': 3, 'categoryname': 'Children'} | {'category': 4, 'categoryname': 'Classics'} | {'category': 5,...</msg>
+<status status="PASS" starttime="20220625 15:47:02.981" endtime="20220625 15:47:03.560"/>
+</kw>
+<kw name="Get All From DB.Category by DB">
+<var>@{result_select}</var>
+<msg timestamp="20220625 15:47:03.560" level="TRACE">Arguments: [  ]</msg>
+<kw name="Execute Sql String Mapped" library="DB">
+<var>@{result}</var>
+<arg>${SQL_select}</arg>
+<doc>SQL query execution where each result row is mapped as a dict with column names as keys.</doc>
+<msg timestamp="20220625 15:47:03.560" level="TRACE">Arguments: [ 'SELECT * FROM "categories";' ]</msg>
+<msg timestamp="20220625 15:47:03.560" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT * FROM &amp;quot;categories&amp;quot;;&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.561" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;category&amp;#x27;: 1, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Action&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 2, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Animation&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 3, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Children&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 4, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Classics&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 5, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Comedy&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 6, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Documentary&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 7, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Drama&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 8, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Family&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 9, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Foreign&amp;#x27;}, {&amp;#x27;category&amp;#x27;: 10, &amp;#x27;categoryname&amp;#x27;: &amp;#x27;Games&amp;#x27;}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.561" level="TRACE">Return: [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}]</msg>
+<msg timestamp="20220625 15:47:03.562" level="INFO">@{result} = [ {'category': 1, 'categoryname': 'Action'} | {'category': 2, 'categoryname': 'Animation'} | {'category': 3, 'categoryname': 'Children'} | {'category': 4, 'categoryname': 'Classics'} | {'category': 5,...</msg>
+<status status="PASS" starttime="20220625 15:47:03.560" endtime="20220625 15:47:03.562"/>
+</kw>
+<msg timestamp="20220625 15:47:03.562" level="TRACE">Return: [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}]</msg>
+<msg timestamp="20220625 15:47:03.562" level="INFO">@{result_select} = [ {'category': 1, 'categoryname': 'Action'} | {'category': 2, 'categoryname': 'Animation'} | {'category': 3, 'categoryname': 'Children'} | {'category': 4, 'categoryname': 'Classics'} | {'category': 5,...</msg>
+<status status="PASS" starttime="20220625 15:47:03.560" endtime="20220625 15:47:03.562"/>
+</kw>
+<kw name="Get All From DB.Category by PostRest">
+<var>${categories}</var>
+<msg timestamp="20220625 15:47:03.563" level="TRACE">Arguments: [  ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${resp}</var>
+<arg>alias</arg>
+<arg>/categories?</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:03.563" level="TRACE">Arguments: [ 'alias' | '/categories?' ]</msg>
+<msg timestamp="20220625 15:47:03.564" level="DEBUG">Starting new HTTP connection (1): localhost:3000</msg>
+<msg timestamp="20220625 15:47:03.566" level="DEBUG">http://localhost:3000 "GET /categories HTTP/1.1" 200 None</msg>
+<msg timestamp="20220625 15:47:03.567" level="INFO">GET Request : url=http://localhost:3000/categories 
+ path_url=/categories 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:03.567" level="INFO">GET Response : url=http://localhost:3000/categories 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-16/*', 'Content-Location': '/categories', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"category":1,"categoryname":"Action"}, 
+ {"category":2,"categoryname":"Animation"}, 
+ {"category":3,"categoryname":"Children"}, 
+ {"category":4,"categoryname":"Classics"}, 
+ {"category":5,"categoryname":"Comedy"}, 
+ {"category":6,"categoryname":"Documentary"}, 
+ {"category":7,"categoryname":"Drama"}, 
+ {"category":8,"categoryname":"Family"}, 
+ {"category":9,"categoryname":"Foreign"}, 
+ {"category":10,"categoryname":"Games"}, 
+ {"category":11,"categoryname":"Horror"}, 
+ {"category":12,"categoryname":"Music"}, 
+ {"category":13,"categoryname":"New"}, 
+ {"category":14,"categoryname":"Sci-Fi"}, 
+ {"category":15,"categoryname":"Sports"}, 
+ {"category":16,"categoryname":"Travel"}, 
+ {"category":17,"categoryname":"Smthng"}] 
+ </msg>
+<msg timestamp="20220625 15:47:03.567" level="TRACE">Return: &lt;Response [200]&gt;</msg>
+<msg timestamp="20220625 15:47:03.567" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:03.563" endtime="20220625 15:47:03.567"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${category}</var>
+<arg>${resp.json()}</arg>
+<arg>$..category</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:03.568" level="TRACE">Arguments: [ [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}] | '$..category' ]</msg>
+<msg timestamp="20220625 15:47:03.588" level="TRACE">Return: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<msg timestamp="20220625 15:47:03.589" level="INFO">${category} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<status status="PASS" starttime="20220625 15:47:03.567" endtime="20220625 15:47:03.589"/>
+</kw>
+<msg timestamp="20220625 15:47:03.589" level="TRACE">Return: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<msg timestamp="20220625 15:47:03.589" level="INFO">${categories} = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]</msg>
+<status status="PASS" starttime="20220625 15:47:03.562" endtime="20220625 15:47:03.589"/>
+</kw>
+<kw name="Compare DB After Inserting">
+<arg>${result_select}</arg>
+<arg>${result_insert}</arg>
+<msg timestamp="20220625 15:47:03.589" level="TRACE">Arguments: [ ${results_select}=[{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}] | ${results_insert}=[{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}] ]</msg>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${results_select}</arg>
+<arg>${results_insert}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<msg timestamp="20220625 15:47:03.590" level="TRACE">Arguments: [ [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}] | [{'category': 1, 'categoryname': 'Action'},
+ {'category': 2, 'categoryname': 'Animation'},
+ {'category': 3, 'categoryname': 'Children'},
+ {'category': 4, 'categoryname': 'Classics'},
+ {'category': 5, 'categoryname': 'Comedy'},
+ {'category': 6, 'categoryname': 'Documentary'},
+ {'category': 7, 'categoryname': 'Drama'},
+ {'category': 8, 'categoryname': 'Family'},
+ {'category': 9, 'categoryname': 'Foreign'},
+ {'category': 10, 'categoryname': 'Games'},
+ {'category': 11, 'categoryname': 'Horror'},
+ {'category': 12, 'categoryname': 'Music'},
+ {'category': 13, 'categoryname': 'New'},
+ {'category': 14, 'categoryname': 'Sci-Fi'},
+ {'category': 15, 'categoryname': 'Sports'},
+ {'category': 16, 'categoryname': 'Travel'},
+ {'category': 17, 'categoryname': 'Smthng'}] ]</msg>
+<msg timestamp="20220625 15:47:03.591" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.590" endtime="20220625 15:47:03.591"/>
+</kw>
+<msg timestamp="20220625 15:47:03.591" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.589" endtime="20220625 15:47:03.591"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.980" endtime="20220625 15:47:03.591"/>
+</test>
+<kw name="Suite Teardown" library="resource" type="TEARDOWN">
+<msg timestamp="20220625 15:47:03.591" level="TRACE">Arguments: [  ]</msg>
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220625 15:47:03.591" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.592" level="INFO">Deleting All Sessions</msg>
+<msg timestamp="20220625 15:47:03.592" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.591" endtime="20220625 15:47:03.592"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<msg timestamp="20220625 15:47:03.592" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.592" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.592" endtime="20220625 15:47:03.592"/>
+</kw>
+<msg timestamp="20220625 15:47:03.592" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.591" endtime="20220625 15:47:03.592"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:02.969" endtime="20220625 15:47:03.592"/>
+</suite>
+<suite id="s1-s1-s4" name="Lesson" source="/home/neuro/PycharmProjects/Nexign_homework/RF2/lesson.robot">
+<kw name="Suite Setup" library="resource" type="SETUP">
+<msg timestamp="20220625 15:47:03.597" level="TRACE">Arguments: [  ]</msg>
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220625 15:47:03.598" level="TRACE">Arguments: [ 'alias' | 'http://localhost:3000' ]</msg>
+<msg timestamp="20220625 15:47:03.598" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20220625 15:47:03.598" level="DEBUG">Creating session: alias</msg>
+<msg timestamp="20220625 15:47:03.598" level="TRACE">Return: &lt;requests.sessions.Session object at 0x7f7df1becfd0&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:03.598" endtime="20220625 15:47:03.598"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<doc>Connection to Postgres DB.</doc>
+<msg timestamp="20220625 15:47:03.598" level="TRACE">Arguments: [ 'app_db' | 'app_user' | 'password' | 'localhost' | '5432' ]</msg>
+<msg timestamp="20220625 15:47:03.598" level="DEBUG">Connecting using : dbhost=localhost, dbport=5432, dbname=app_db, dbusername=app_user, dbpassword=password, alias=None</msg>
+<msg timestamp="20220625 15:47:03.605" level="TRACE">Return: 4</msg>
+<status status="PASS" starttime="20220625 15:47:03.598" endtime="20220625 15:47:03.605"/>
+</kw>
+<msg timestamp="20220625 15:47:03.605" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.597" endtime="20220625 15:47:03.605"/>
+</kw>
+<test id="s1-s1-s4-t1" name="Check Horizontal Filtering" line="12">
+<kw name="Get Last Name And Zip From PostRest">
+<var>${lastname}</var>
+<var>${zip}</var>
+<arg>arguments=age=lt.21&amp;state=eq.SD</arg>
+<msg timestamp="20220625 15:47:03.606" level="TRACE">Arguments: [ ${arguments}='age=lt.21&amp;state=eq.SD' ]</msg>
+<kw name="GET On Session" library="Req">
+<var>${resp}</var>
+<arg>alias</arg>
+<arg>/customers?</arg>
+<arg>params=${arguments}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220625 15:47:03.607" level="TRACE">Arguments: [ 'alias' | '/customers?' | params='age=lt.21&amp;state=eq.SD' ]</msg>
+<msg timestamp="20220625 15:47:03.608" level="DEBUG">Starting new HTTP connection (1): localhost:3000</msg>
+<msg timestamp="20220625 15:47:03.614" level="DEBUG">http://localhost:3000 "GET /customers?age=lt.21&amp;state=eq.SD HTTP/1.1" 200 None</msg>
+<msg timestamp="20220625 15:47:03.614" level="INFO">GET Request : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ path_url=/customers?age=lt.21&amp;state=eq.SD 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 15:47:03.614" level="INFO">GET Response : url=http://localhost:3000/customers?age=lt.21&amp;state=eq.SD 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 08:47:02 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-11/*', 'Content-Location': '/customers?age=lt.21&amp;state=eq.SD', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"customerid":430,"firstname":"SADBYE","lastname":"LQFAMCRRWU","address1":"2815718090 Dell Way","address2":"\\N","city":"MCKVQYH","state":"SD","zip":14548,"country":"US","region":1,"email":"LQFAMCRRWU@dell.com","phone":"2815718090","creditcardtype":4,"creditcard":"7.00995E+15","creditcardexpiration":"2009/12","username":"user430","password":"password","age":19,"income":20000,"gender":"M"}, 
+ {"customerid":1620,"firstname":"MWBVRV","lastname":"JSPQUHRHNQ","address1":"5927176243 Dell Way","address2":"\\N","city":"YRIMDVC","state":"SD","zip":92018,"country":"US","region":1,"email":"JSPQUHRHNQ@dell.com","phone":"5927176243","creditcardtype":3,"creditcard":"8.86601E+15","creditcardexpiration":"2009/10","username":"user1620","password":"password","age":20,"income":80000,"gender":"M"}, 
+ {"customerid":1902,"firstname":"CXUBFK","lastname":"APXYQPXOPS","address1":"9932233930 Dell Way","address2":"\\N","city":"IWHUFST","state":"SD","zip":46577,"country":"US","region":1,"email":"APXYQPXOPS@dell.com","phone":"9932233930","creditcardtype":4,"creditcard":"3.59669E+15","creditcardexpiration":"2009/06","username":"user1902","password":"password","age":20,"income":60000,"gender":"F"}, 
+ {"customerid":2388,"firstname":"YLHKWR","lastname":"ZWVATZIHSZ","address1":"9018806393 Dell Way","address2":"\\N","city":"NFGANML","state":"SD","zip":27968,"country":"US","region":1,"email":"ZWVATZIHSZ@dell.com","phone":"9018806393","creditcardtype":5,"creditcard":"7.36411E+15","creditcardexpiration":"2009/05","username":"user2388","password":"password","age":18,"income":40000,"gender":"M"}, 
+ {"customerid":4092,"firstname":"NWGZHZ","lastname":"SXKCUISAYM","address1":"2454639426 Dell Way","address2":"\\N","city":"VVRAJTG","state":"SD","zip":94876,"country":"US","region":1,"email":"SXKCUISAYM@dell.com","phone":"2454639426","creditcardtype":1,"creditcard":"2.54479E+15","creditcardexpiration":"2009/06","username":"user4092","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":5456,"firstname":"QYLUXC","lastname":"KZJQHEYBZN","address1":"7869868251 Dell Way","address2":"\\N","city":"AQBGHYF","state":"SD","zip":57173,"country":"US","region":1,"email":"KZJQHEYBZN@dell.com","phone":"7869868251","creditcardtype":1,"creditcard":"6.62925E+15","creditcardexpiration":"2011/01","username":"user5456","password":"password","age":20,"income":40000,"gender":"F"}, 
+ {"customerid":5490,"firstname":"YSLZYD","lastname":"EWSAPICKKO","address1":"2610554455 Dell Way","address2":"\\N","city":"CYOLTSZ","state":"SD","zip":46821,"country":"US","region":1,"email":"EWSAPICKKO@dell.com","phone":"2610554455","creditcardtype":1,"creditcard":"9.77978E+15","creditcardexpiration":"2010/09","username":"user5490","password":"password","age":19,"income":60000,"gender":"F"}, 
+ {"customerid":6443,"firstname":"WJMFYA","lastname":"PECYSELKTZ","address1":"3711128852 Dell Way","address2":"\\N","city":"ZHJGKJQ","state":"SD","zip":94247,"country":"US","region":1,"email":"PECYSELKTZ@dell.com","phone":"3711128852","creditcardtype":5,"creditcard":"4.02913E+15","creditcardexpiration":"2012/10","username":"user6443","password":"password","age":19,"income":100000,"gender":"F"}, 
+ {"customerid":7340,"firstname":"OQMUAV","lastname":"VHKACPCMGV","address1":"1166718371 Dell Way","address2":"\\N","city":"UTKEZEW","state":"SD","zip":88021,"country":"US","region":1,"email":"VHKACPCMGV@dell.com","phone":"1166718371","creditcardtype":1,"creditcard":"8.81066E+15","creditcardexpiration":"2009/12","username":"user7340","password":"password","age":19,"income":100000,"gender":"M"}, 
+ {"customerid":8507,"firstname":"PUMLTB","lastname":"UISNUVEPAT","address1":"8134042856 Dell Way","address2":"\\N","city":"WJDLUCQ","state":"SD","zip":33323,"country":"US","region":1,"email":"UISNUVEPAT@dell.com","phone":"8134042856","creditcardtype":2,"creditcard":"9.82469E+15","creditcardexpiration":"2008/01","username":"user8507","password":"password","age":19,"income":80000,"gender":"M"}, 
+ {"customerid":8759,"firstname":"AUZITM","lastname":"BPHXCGRCAL","address1":"8515647409 Dell Way","address2":"\\N","city":"OVMFHJL","state":"SD","zip":61018,"country":"US","region":1,"email":"BPHXCGRCAL@dell.com","phone":"8515647409","creditcardtype":5,"creditcard":"2.00792E+15","creditcardexpiration":"2011/04","username":"user8759","password":"password","age":20,"income":80000,"gender":"F"}, 
+ {"customerid":9527,"firstname":"XTUEKT","lastname":"EAPTUWLGIM","address1":"9690323248 Dell Way","address2":"\\N","city":"TTYADUC","state":"SD","zip":51169,"country":"US","region":1,"email":"EAPTUWLGIM@dell.com","phone":"9690323248","creditcardtype":4,"creditcard":"8.30594E+15","creditcardexpiration":"2011/05","username":"user9527","password":"password","age":20,"income":80000,"gender":"F"}] 
+ </msg>
+<msg timestamp="20220625 15:47:03.614" level="TRACE">Return: &lt;Response [200]&gt;</msg>
+<msg timestamp="20220625 15:47:03.614" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220625 15:47:03.606" endtime="20220625 15:47:03.615"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${lastname}</var>
+<arg>${resp.json()}</arg>
+<arg>$..lastname</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:03.615" level="TRACE">Arguments: [ [{'address1': '2815718090 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'MCKVQYH',
+  'country': 'US',
+  'creditcard': '7.00995E+15',
+  'creditcardexpiration': '2009/12',
+  'creditcardtype': 4,
+  'customerid': 430,
+  'email': 'LQFAMCRRWU@dell.com',
+  'firstname': 'SADBYE',
+  'gender': 'M',
+  'income': 20000,
+  'lastname': 'LQFAMCRRWU',
+  'password': 'password',
+  'phone': '2815718090',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user430',
+  'zip': 14548},
+ {'address1': '5927176243 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'YRIMDVC',
+  'country': 'US',
+  'creditcard': '8.86601E+15',
+  'creditcardexpiration': '2009/10',
+  'creditcardtype': 3,
+  'customerid': 1620,
+  'email': 'JSPQUHRHNQ@dell.com',
+  'firstname': 'MWBVRV',
+  'gender': 'M',
+  'income': 80000,
+  'lastname': 'JSPQUHRHNQ',
+  'password': 'password',
+  'phone': '5927176243',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user1620',
+  'zip': 92018},
+ {'address1': '9932233930 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'IWHUFST',
+  'country': 'US',
+  'creditcard': '3.59669E+15',
+  'creditcardexpiration': '2009/06',
+  'creditcardtype': 4,
+  'customerid': 1902,
+  'email': 'APXYQPXOPS@dell.com',
+  'firstname': 'CXUBFK',
+  'gender': 'F',
+  'income': 60000,
+  'lastname': 'APXYQPXOPS',
+  'password': 'password',
+  'phone': '9932233930',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user1902',
+  'zip': 46577},
+ {'address1': '9018806393 Dell Way',
+  'address2': '\\N',
+  'age': 18,
+  'city': 'NFGANML',
+  'country': 'US',
+  'creditcard': '7.36411E+15',
+  'creditcardexpiration': '2009/05',
+  'creditcardtype': 5,
+  'customerid': 2388,
+  'email': 'ZWVATZIHSZ@dell.com',
+  'firstname': 'YLHKWR',
+  'gender': 'M',
+  'income': 40000,
+  'lastname': 'ZWVATZIHSZ',
+  'password': 'password',
+  'phone': '9018806393',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user2388',
+  'zip': 27968},
+ {'address1': '2454639426 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'VVRAJTG',
+  'country': 'US',
+  'creditcard': '2.54479E+15',
+  'creditcardexpiration': '2009/06',
+  'creditcardtype': 1,
+  'customerid': 4092,
+  'email': 'SXKCUISAYM@dell.com',
+  'firstname': 'NWGZHZ',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'SXKCUISAYM',
+  'password': 'password',
+  'phone': '2454639426',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user4092',
+  'zip': 94876},
+ {'address1': '7869868251 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'AQBGHYF',
+  'country': 'US',
+  'creditcard': '6.62925E+15',
+  'creditcardexpiration': '2011/01',
+  'creditcardtype': 1,
+  'customerid': 5456,
+  'email': 'KZJQHEYBZN@dell.com',
+  'firstname': 'QYLUXC',
+  'gender': 'F',
+  'income': 40000,
+  'lastname': 'KZJQHEYBZN',
+  'password': 'password',
+  'phone': '7869868251',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user5456',
+  'zip': 57173},
+ {'address1': '2610554455 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'CYOLTSZ',
+  'country': 'US',
+  'creditcard': '9.77978E+15',
+  'creditcardexpiration': '2010/09',
+  'creditcardtype': 1,
+  'customerid': 5490,
+  'email': 'EWSAPICKKO@dell.com',
+  'firstname': 'YSLZYD',
+  'gender': 'F',
+  'income': 60000,
+  'lastname': 'EWSAPICKKO',
+  'password': 'password',
+  'phone': '2610554455',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user5490',
+  'zip': 46821},
+ {'address1': '3711128852 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'ZHJGKJQ',
+  'country': 'US',
+  'creditcard': '4.02913E+15',
+  'creditcardexpiration': '2012/10',
+  'creditcardtype': 5,
+  'customerid': 6443,
+  'email': 'PECYSELKTZ@dell.com',
+  'firstname': 'WJMFYA',
+  'gender': 'F',
+  'income': 100000,
+  'lastname': 'PECYSELKTZ',
+  'password': 'password',
+  'phone': '3711128852',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user6443',
+  'zip': 94247},
+ {'address1': '1166718371 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'UTKEZEW',
+  'country': 'US',
+  'creditcard': '8.81066E+15',
+  'creditcardexpiration': '2009/12',
+  'creditcardtype': 1,
+  'customerid': 7340,
+  'email': 'VHKACPCMGV@dell.com',
+  'firstname': 'OQMUAV',
+  'gender': 'M',
+  'income': 100000,
+  'lastname': 'VHKACPCMGV',
+  'password': 'password',
+  'phone': '1166718371',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user7340',
+  'zip': 88021},
+ {'address1': '8134042856 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'WJDLUCQ',
+  'country': 'US',
+  'creditcard': '9.82469E+15',
+  'creditcardexpiration': '2008/01',
+  'creditcardtype': 2,
+  'customerid': 8507,
+  'email': 'UISNUVEPAT@dell.com',
+  'firstname': 'PUMLTB',
+  'gender': 'M',
+  'income': 80000,
+  'lastname': 'UISNUVEPAT',
+  'password': 'password',
+  'phone': '8134042856',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user8507',
+  'zip': 33323},
+ {'address1': '8515647409 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'OVMFHJL',
+  'country': 'US',
+  'creditcard': '2.00792E+15',
+  'creditcardexpiration': '2011/04',
+  'creditcardtype': 5,
+  'customerid': 8759,
+  'email': 'BPHXCGRCAL@dell.com',
+  'firstname': 'AUZITM',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'BPHXCGRCAL',
+  'password': 'password',
+  'phone': '8515647409',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user8759',
+  'zip': 61018},
+ {'address1': '9690323248 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'TTYADUC',
+  'country': 'US',
+  'creditcard': '8.30594E+15',
+  'creditcardexpiration': '2011/05',
+  'creditcardtype': 4,
+  'customerid': 9527,
+  'email': 'EAPTUWLGIM@dell.com',
+  'firstname': 'XTUEKT',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'EAPTUWLGIM',
+  'password': 'password',
+  'phone': '9690323248',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user9527',
+  'zip': 51169}] | '$..lastname' ]</msg>
+<msg timestamp="20220625 15:47:03.638" level="TRACE">Return: ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT',
+ 'BPHXCGRCAL',
+ 'EAPTUWLGIM']</msg>
+<msg timestamp="20220625 15:47:03.638" level="INFO">${lastname} = ['LQFAMCRRWU', 'JSPQUHRHNQ', 'APXYQPXOPS', 'ZWVATZIHSZ', 'SXKCUISAYM', 'KZJQHEYBZN', 'EWSAPICKKO', 'PECYSELKTZ', 'VHKACPCMGV', 'UISNUVEPAT', 'BPHXCGRCAL', 'EAPTUWLGIM']</msg>
+<status status="PASS" starttime="20220625 15:47:03.615" endtime="20220625 15:47:03.638"/>
+</kw>
+<kw name="Get Elements" library="JS">
+<var>${zip}</var>
+<arg>${resp.json()}</arg>
+<arg>$..zip</arg>
+<doc>Get list of elements from _json_source_, matching [http://goessner.net/articles/JsonPath/|JSONPath] expression.</doc>
+<msg timestamp="20220625 15:47:03.638" level="TRACE">Arguments: [ [{'address1': '2815718090 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'MCKVQYH',
+  'country': 'US',
+  'creditcard': '7.00995E+15',
+  'creditcardexpiration': '2009/12',
+  'creditcardtype': 4,
+  'customerid': 430,
+  'email': 'LQFAMCRRWU@dell.com',
+  'firstname': 'SADBYE',
+  'gender': 'M',
+  'income': 20000,
+  'lastname': 'LQFAMCRRWU',
+  'password': 'password',
+  'phone': '2815718090',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user430',
+  'zip': 14548},
+ {'address1': '5927176243 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'YRIMDVC',
+  'country': 'US',
+  'creditcard': '8.86601E+15',
+  'creditcardexpiration': '2009/10',
+  'creditcardtype': 3,
+  'customerid': 1620,
+  'email': 'JSPQUHRHNQ@dell.com',
+  'firstname': 'MWBVRV',
+  'gender': 'M',
+  'income': 80000,
+  'lastname': 'JSPQUHRHNQ',
+  'password': 'password',
+  'phone': '5927176243',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user1620',
+  'zip': 92018},
+ {'address1': '9932233930 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'IWHUFST',
+  'country': 'US',
+  'creditcard': '3.59669E+15',
+  'creditcardexpiration': '2009/06',
+  'creditcardtype': 4,
+  'customerid': 1902,
+  'email': 'APXYQPXOPS@dell.com',
+  'firstname': 'CXUBFK',
+  'gender': 'F',
+  'income': 60000,
+  'lastname': 'APXYQPXOPS',
+  'password': 'password',
+  'phone': '9932233930',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user1902',
+  'zip': 46577},
+ {'address1': '9018806393 Dell Way',
+  'address2': '\\N',
+  'age': 18,
+  'city': 'NFGANML',
+  'country': 'US',
+  'creditcard': '7.36411E+15',
+  'creditcardexpiration': '2009/05',
+  'creditcardtype': 5,
+  'customerid': 2388,
+  'email': 'ZWVATZIHSZ@dell.com',
+  'firstname': 'YLHKWR',
+  'gender': 'M',
+  'income': 40000,
+  'lastname': 'ZWVATZIHSZ',
+  'password': 'password',
+  'phone': '9018806393',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user2388',
+  'zip': 27968},
+ {'address1': '2454639426 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'VVRAJTG',
+  'country': 'US',
+  'creditcard': '2.54479E+15',
+  'creditcardexpiration': '2009/06',
+  'creditcardtype': 1,
+  'customerid': 4092,
+  'email': 'SXKCUISAYM@dell.com',
+  'firstname': 'NWGZHZ',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'SXKCUISAYM',
+  'password': 'password',
+  'phone': '2454639426',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user4092',
+  'zip': 94876},
+ {'address1': '7869868251 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'AQBGHYF',
+  'country': 'US',
+  'creditcard': '6.62925E+15',
+  'creditcardexpiration': '2011/01',
+  'creditcardtype': 1,
+  'customerid': 5456,
+  'email': 'KZJQHEYBZN@dell.com',
+  'firstname': 'QYLUXC',
+  'gender': 'F',
+  'income': 40000,
+  'lastname': 'KZJQHEYBZN',
+  'password': 'password',
+  'phone': '7869868251',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user5456',
+  'zip': 57173},
+ {'address1': '2610554455 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'CYOLTSZ',
+  'country': 'US',
+  'creditcard': '9.77978E+15',
+  'creditcardexpiration': '2010/09',
+  'creditcardtype': 1,
+  'customerid': 5490,
+  'email': 'EWSAPICKKO@dell.com',
+  'firstname': 'YSLZYD',
+  'gender': 'F',
+  'income': 60000,
+  'lastname': 'EWSAPICKKO',
+  'password': 'password',
+  'phone': '2610554455',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user5490',
+  'zip': 46821},
+ {'address1': '3711128852 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'ZHJGKJQ',
+  'country': 'US',
+  'creditcard': '4.02913E+15',
+  'creditcardexpiration': '2012/10',
+  'creditcardtype': 5,
+  'customerid': 6443,
+  'email': 'PECYSELKTZ@dell.com',
+  'firstname': 'WJMFYA',
+  'gender': 'F',
+  'income': 100000,
+  'lastname': 'PECYSELKTZ',
+  'password': 'password',
+  'phone': '3711128852',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user6443',
+  'zip': 94247},
+ {'address1': '1166718371 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'UTKEZEW',
+  'country': 'US',
+  'creditcard': '8.81066E+15',
+  'creditcardexpiration': '2009/12',
+  'creditcardtype': 1,
+  'customerid': 7340,
+  'email': 'VHKACPCMGV@dell.com',
+  'firstname': 'OQMUAV',
+  'gender': 'M',
+  'income': 100000,
+  'lastname': 'VHKACPCMGV',
+  'password': 'password',
+  'phone': '1166718371',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user7340',
+  'zip': 88021},
+ {'address1': '8134042856 Dell Way',
+  'address2': '\\N',
+  'age': 19,
+  'city': 'WJDLUCQ',
+  'country': 'US',
+  'creditcard': '9.82469E+15',
+  'creditcardexpiration': '2008/01',
+  'creditcardtype': 2,
+  'customerid': 8507,
+  'email': 'UISNUVEPAT@dell.com',
+  'firstname': 'PUMLTB',
+  'gender': 'M',
+  'income': 80000,
+  'lastname': 'UISNUVEPAT',
+  'password': 'password',
+  'phone': '8134042856',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user8507',
+  'zip': 33323},
+ {'address1': '8515647409 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'OVMFHJL',
+  'country': 'US',
+  'creditcard': '2.00792E+15',
+  'creditcardexpiration': '2011/04',
+  'creditcardtype': 5,
+  'customerid': 8759,
+  'email': 'BPHXCGRCAL@dell.com',
+  'firstname': 'AUZITM',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'BPHXCGRCAL',
+  'password': 'password',
+  'phone': '8515647409',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user8759',
+  'zip': 61018},
+ {'address1': '9690323248 Dell Way',
+  'address2': '\\N',
+  'age': 20,
+  'city': 'TTYADUC',
+  'country': 'US',
+  'creditcard': '8.30594E+15',
+  'creditcardexpiration': '2011/05',
+  'creditcardtype': 4,
+  'customerid': 9527,
+  'email': 'EAPTUWLGIM@dell.com',
+  'firstname': 'XTUEKT',
+  'gender': 'F',
+  'income': 80000,
+  'lastname': 'EAPTUWLGIM',
+  'password': 'password',
+  'phone': '9690323248',
+  'region': 1,
+  'state': 'SD',
+  'username': 'user9527',
+  'zip': 51169}] | '$..zip' ]</msg>
+<msg timestamp="20220625 15:47:03.657" level="TRACE">Return: [14548,
+ 92018,
+ 46577,
+ 27968,
+ 94876,
+ 57173,
+ 46821,
+ 94247,
+ 88021,
+ 33323,
+ 61018,
+ 51169]</msg>
+<msg timestamp="20220625 15:47:03.657" level="INFO">${zip} = [14548, 92018, 46577, 27968, 94876, 57173, 46821, 94247, 88021, 33323, 61018, 51169]</msg>
+<status status="PASS" starttime="20220625 15:47:03.638" endtime="20220625 15:47:03.657"/>
+</kw>
+<msg timestamp="20220625 15:47:03.657" level="TRACE">Return: [['LQFAMCRRWU',
+  'JSPQUHRHNQ',
+  'APXYQPXOPS',
+  'ZWVATZIHSZ',
+  'SXKCUISAYM',
+  'KZJQHEYBZN',
+  'EWSAPICKKO',
+  'PECYSELKTZ',
+  'VHKACPCMGV',
+  'UISNUVEPAT',
+  'BPHXCGRCAL',
+  'EAPTUWLGIM'],
+ [14548,
+  92018,
+  46577,
+  27968,
+  94876,
+  57173,
+  46821,
+  94247,
+  88021,
+  33323,
+  61018,
+  51169]]</msg>
+<msg timestamp="20220625 15:47:03.657" level="INFO">${lastname} = ['LQFAMCRRWU', 'JSPQUHRHNQ', 'APXYQPXOPS', 'ZWVATZIHSZ', 'SXKCUISAYM', 'KZJQHEYBZN', 'EWSAPICKKO', 'PECYSELKTZ', 'VHKACPCMGV', 'UISNUVEPAT', 'BPHXCGRCAL', 'EAPTUWLGIM']</msg>
+<msg timestamp="20220625 15:47:03.657" level="INFO">${zip} = [14548, 92018, 46577, 27968, 94876, 57173, 46821, 94247, 88021, 33323, 61018, 51169]</msg>
+<status status="PASS" starttime="20220625 15:47:03.606" endtime="20220625 15:47:03.657"/>
+</kw>
+<kw name="Get Last Name And Zip From DB">
+<var>@{result}</var>
+<arg>age=21</arg>
+<arg>state=SD</arg>
+<msg timestamp="20220625 15:47:03.658" level="TRACE">Arguments: [ &amp;{args}={'age': '21', 'state': 'SD'} ]</msg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${params}</var>
+<arg>&amp;{args}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220625 15:47:03.658" level="TRACE">Arguments: [ '&amp;{args}' ]</msg>
+<msg timestamp="20220625 15:47:03.658" level="TRACE">Return: {'age': '21', 'state': 'SD'}</msg>
+<msg timestamp="20220625 15:47:03.658" level="INFO">${params} = {'age': '21', 'state': 'SD'}</msg>
+<status status="PASS" starttime="20220625 15:47:03.658" endtime="20220625 15:47:03.658"/>
+</kw>
+<kw name="Execute Sql String Mapped" library="DB">
+<var>@{result}</var>
+<arg>${SQL}</arg>
+<arg>&amp;{params}</arg>
+<doc>SQL query execution where each result row is mapped as a dict with column names as keys.</doc>
+<msg timestamp="20220625 15:47:03.659" level="TRACE">Arguments: [ 'SELECT zip, lastname FROM public.customers WHERE state=%(state)s AND age&lt;%(age)s' | age='21' | state='SD' ]</msg>
+<msg timestamp="20220625 15:47:03.659" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT zip, lastname FROM public.customers WHERE state=%(state)s AND age&amp;lt;%(age)s&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.663" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;zip&amp;#x27;: 14548, &amp;#x27;lastname&amp;#x27;: &amp;#x27;LQFAMCRRWU&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 92018, &amp;#x27;lastname&amp;#x27;: &amp;#x27;JSPQUHRHNQ&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 46577, &amp;#x27;lastname&amp;#x27;: &amp;#x27;APXYQPXOPS&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 27968, &amp;#x27;lastname&amp;#x27;: &amp;#x27;ZWVATZIHSZ&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 94876, &amp;#x27;lastname&amp;#x27;: &amp;#x27;SXKCUISAYM&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 57173, &amp;#x27;lastname&amp;#x27;: &amp;#x27;KZJQHEYBZN&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 46821, &amp;#x27;lastname&amp;#x27;: &amp;#x27;EWSAPICKKO&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 94247, &amp;#x27;lastname&amp;#x27;: &amp;#x27;PECYSELKTZ&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 88021, &amp;#x27;lastname&amp;#x27;: &amp;#x27;VHKACPCMGV&amp;#x27;}, {&amp;#x27;zip&amp;#x27;: 33323, &amp;#x27;lastname&amp;#x27;: &amp;#x27;UISNUVEPAT&amp;#x27;}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 15:47:03.664" level="TRACE">Return: [{'lastname': 'LQFAMCRRWU', 'zip': 14548},
+ {'lastname': 'JSPQUHRHNQ', 'zip': 92018},
+ {'lastname': 'APXYQPXOPS', 'zip': 46577},
+ {'lastname': 'ZWVATZIHSZ', 'zip': 27968},
+ {'lastname': 'SXKCUISAYM', 'zip': 94876},
+ {'lastname': 'KZJQHEYBZN', 'zip': 57173},
+ {'lastname': 'EWSAPICKKO', 'zip': 46821},
+ {'lastname': 'PECYSELKTZ', 'zip': 94247},
+ {'lastname': 'VHKACPCMGV', 'zip': 88021},
+ {'lastname': 'UISNUVEPAT', 'zip': 33323},
+ {'lastname': 'BPHXCGRCAL', 'zip': 61018},
+ {'lastname': 'EAPTUWLGIM', 'zip': 51169}]</msg>
+<msg timestamp="20220625 15:47:03.664" level="INFO">@{result} = [ {'zip': 14548, 'lastname': 'LQFAMCRRWU'} | {'zip': 92018, 'lastname': 'JSPQUHRHNQ'} | {'zip': 46577, 'lastname': 'APXYQPXOPS'} | {'zip': 27968, 'lastname': 'ZWVATZIHSZ'} | {'zip': 94876, 'lastname':...</msg>
+<status status="PASS" starttime="20220625 15:47:03.658" endtime="20220625 15:47:03.664"/>
+</kw>
+<msg timestamp="20220625 15:47:03.664" level="TRACE">Return: [{'lastname': 'LQFAMCRRWU', 'zip': 14548},
+ {'lastname': 'JSPQUHRHNQ', 'zip': 92018},
+ {'lastname': 'APXYQPXOPS', 'zip': 46577},
+ {'lastname': 'ZWVATZIHSZ', 'zip': 27968},
+ {'lastname': 'SXKCUISAYM', 'zip': 94876},
+ {'lastname': 'KZJQHEYBZN', 'zip': 57173},
+ {'lastname': 'EWSAPICKKO', 'zip': 46821},
+ {'lastname': 'PECYSELKTZ', 'zip': 94247},
+ {'lastname': 'VHKACPCMGV', 'zip': 88021},
+ {'lastname': 'UISNUVEPAT', 'zip': 33323},
+ {'lastname': 'BPHXCGRCAL', 'zip': 61018},
+ {'lastname': 'EAPTUWLGIM', 'zip': 51169}]</msg>
+<msg timestamp="20220625 15:47:03.665" level="INFO">@{result} = [ {'zip': 14548, 'lastname': 'LQFAMCRRWU'} | {'zip': 92018, 'lastname': 'JSPQUHRHNQ'} | {'zip': 46577, 'lastname': 'APXYQPXOPS'} | {'zip': 27968, 'lastname': 'ZWVATZIHSZ'} | {'zip': 94876, 'lastname':...</msg>
+<status status="PASS" starttime="20220625 15:47:03.658" endtime="20220625 15:47:03.665"/>
+</kw>
+<kw name="Compare Results">
+<arg>${result}</arg>
+<arg>${lastname}</arg>
+<arg>${zip}</arg>
+<msg timestamp="20220625 15:47:03.666" level="TRACE">Arguments: [ ${result_from_db}=[{'lastname': 'LQFAMCRRWU', 'zip': 14548},
+ {'lastname': 'JSPQUHRHNQ', 'zip': 92018},
+ {'lastname': 'APXYQPXOPS', 'zip': 46577},
+ {'lastname': 'ZWVATZIHSZ', 'zip': 27968},
+ {'lastname': 'SXKCUISAYM', 'zip': 94876},
+ {'lastname': 'KZJQHEYBZN', 'zip': 57173},
+ {'lastname': 'EWSAPICKKO', 'zip': 46821},
+ {'lastname': 'PECYSELKTZ', 'zip': 94247},
+ {'lastname': 'VHKACPCMGV', 'zip': 88021},
+ {'lastname': 'UISNUVEPAT', 'zip': 33323},
+ {'lastname': 'BPHXCGRCAL', 'zip': 61018},
+ {'lastname': 'EAPTUWLGIM', 'zip': 51169}] | ${lastnames}=['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT',
+ 'BPHXCGRCAL',
+ 'EAPTUWLGIM'] | ${zips}=[14548,
+ 92018,
+ 46577,
+ 27968,
+ 94876,
+ 57173,
+ 46821,
+ 94247,
+ 88021,
+ 33323,
+ 61018,
+ 51169] ]</msg>
+<kw name="Create List" library="BuiltIn">
+<var>${lastnames_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220625 15:47:03.666" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.666" level="TRACE">Return: []</msg>
+<msg timestamp="20220625 15:47:03.666" level="INFO">${lastnames_db} = []</msg>
+<status status="PASS" starttime="20220625 15:47:03.666" endtime="20220625 15:47:03.666"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${zips_db}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220625 15:47:03.667" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.667" level="TRACE">Return: []</msg>
+<msg timestamp="20220625 15:47:03.667" level="INFO">${zips_db} = []</msg>
+<status status="PASS" starttime="20220625 15:47:03.667" endtime="20220625 15:47:03.667"/>
+</kw>
+<for flavor="IN">
+<var>${k}</var>
+<value>@{result_from_db}</value>
+<iter>
+<var name="${k}">{'zip': 14548, 'lastname': 'LQFAMCRRWU'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.668" level="TRACE">Arguments: [ 14548 ]</msg>
+<msg timestamp="20220625 15:47:03.668" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.668" level="TRACE">Return: 14548.0</msg>
+<msg timestamp="20220625 15:47:03.668" level="INFO">${k2} = 14548.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.667" endtime="20220625 15:47:03.668"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.668" level="TRACE">Arguments: [ [] | 'LQFAMCRRWU' ]</msg>
+<msg timestamp="20220625 15:47:03.668" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.668" endtime="20220625 15:47:03.668"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.669" level="TRACE">Arguments: [ [] | 14548.0 ]</msg>
+<msg timestamp="20220625 15:47:03.669" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.669" endtime="20220625 15:47:03.669"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.667" endtime="20220625 15:47:03.669"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 92018, 'lastname': 'JSPQUHRHNQ'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.669" level="TRACE">Arguments: [ 92018 ]</msg>
+<msg timestamp="20220625 15:47:03.669" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.670" level="TRACE">Return: 92018.0</msg>
+<msg timestamp="20220625 15:47:03.670" level="INFO">${k2} = 92018.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.669" endtime="20220625 15:47:03.670"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.670" level="TRACE">Arguments: [ ['LQFAMCRRWU'] | 'JSPQUHRHNQ' ]</msg>
+<msg timestamp="20220625 15:47:03.670" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.670" endtime="20220625 15:47:03.670"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.671" level="TRACE">Arguments: [ [14548.0] | 92018.0 ]</msg>
+<msg timestamp="20220625 15:47:03.671" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.670" endtime="20220625 15:47:03.671"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.669" endtime="20220625 15:47:03.671"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 46577, 'lastname': 'APXYQPXOPS'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.671" level="TRACE">Arguments: [ 46577 ]</msg>
+<msg timestamp="20220625 15:47:03.671" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.671" level="TRACE">Return: 46577.0</msg>
+<msg timestamp="20220625 15:47:03.671" level="INFO">${k2} = 46577.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.671" endtime="20220625 15:47:03.672"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.672" level="TRACE">Arguments: [ ['LQFAMCRRWU', 'JSPQUHRHNQ'] | 'APXYQPXOPS' ]</msg>
+<msg timestamp="20220625 15:47:03.672" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.672" endtime="20220625 15:47:03.672"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.672" level="TRACE">Arguments: [ [14548.0, 92018.0] | 46577.0 ]</msg>
+<msg timestamp="20220625 15:47:03.673" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.672" endtime="20220625 15:47:03.673"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.671" endtime="20220625 15:47:03.673"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 27968, 'lastname': 'ZWVATZIHSZ'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.673" level="TRACE">Arguments: [ 27968 ]</msg>
+<msg timestamp="20220625 15:47:03.673" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.673" level="TRACE">Return: 27968.0</msg>
+<msg timestamp="20220625 15:47:03.673" level="INFO">${k2} = 27968.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.673" endtime="20220625 15:47:03.673"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.674" level="TRACE">Arguments: [ ['LQFAMCRRWU', 'JSPQUHRHNQ', 'APXYQPXOPS'] | 'ZWVATZIHSZ' ]</msg>
+<msg timestamp="20220625 15:47:03.674" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.673" endtime="20220625 15:47:03.674"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.674" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0] | 27968.0 ]</msg>
+<msg timestamp="20220625 15:47:03.674" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.674" endtime="20220625 15:47:03.674"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.673" endtime="20220625 15:47:03.674"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 94876, 'lastname': 'SXKCUISAYM'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.675" level="TRACE">Arguments: [ 94876 ]</msg>
+<msg timestamp="20220625 15:47:03.675" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.675" level="TRACE">Return: 94876.0</msg>
+<msg timestamp="20220625 15:47:03.675" level="INFO">${k2} = 94876.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.675" endtime="20220625 15:47:03.675"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.675" level="TRACE">Arguments: [ ['LQFAMCRRWU', 'JSPQUHRHNQ', 'APXYQPXOPS', 'ZWVATZIHSZ'] | 'SXKCUISAYM' ]</msg>
+<msg timestamp="20220625 15:47:03.675" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.675" endtime="20220625 15:47:03.675"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.676" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0, 27968.0] | 94876.0 ]</msg>
+<msg timestamp="20220625 15:47:03.676" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.675" endtime="20220625 15:47:03.676"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.674" endtime="20220625 15:47:03.676"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 57173, 'lastname': 'KZJQHEYBZN'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.676" level="TRACE">Arguments: [ 57173 ]</msg>
+<msg timestamp="20220625 15:47:03.676" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.676" level="TRACE">Return: 57173.0</msg>
+<msg timestamp="20220625 15:47:03.676" level="INFO">${k2} = 57173.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.676" endtime="20220625 15:47:03.676"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.676" level="TRACE">Arguments: [ ['LQFAMCRRWU', 'JSPQUHRHNQ', 'APXYQPXOPS', 'ZWVATZIHSZ', 'SXKCUISAYM'] | 'KZJQHEYBZN' ]</msg>
+<msg timestamp="20220625 15:47:03.677" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.676" endtime="20220625 15:47:03.677"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.677" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0, 27968.0, 94876.0] | 57173.0 ]</msg>
+<msg timestamp="20220625 15:47:03.677" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.677" endtime="20220625 15:47:03.677"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.676" endtime="20220625 15:47:03.677"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 46821, 'lastname': 'EWSAPICKKO'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.677" level="TRACE">Arguments: [ 46821 ]</msg>
+<msg timestamp="20220625 15:47:03.677" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.677" level="TRACE">Return: 46821.0</msg>
+<msg timestamp="20220625 15:47:03.677" level="INFO">${k2} = 46821.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.677" endtime="20220625 15:47:03.677"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.678" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN'] | 'EWSAPICKKO' ]</msg>
+<msg timestamp="20220625 15:47:03.678" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.678" endtime="20220625 15:47:03.678"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.678" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0, 27968.0, 94876.0, 57173.0] | 46821.0 ]</msg>
+<msg timestamp="20220625 15:47:03.678" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.678" endtime="20220625 15:47:03.678"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.677" endtime="20220625 15:47:03.678"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 94247, 'lastname': 'PECYSELKTZ'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Arguments: [ 94247 ]</msg>
+<msg timestamp="20220625 15:47:03.679" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Return: 94247.0</msg>
+<msg timestamp="20220625 15:47:03.679" level="INFO">${k2} = 94247.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.678" endtime="20220625 15:47:03.679"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO'] | 'PECYSELKTZ' ]</msg>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.679" endtime="20220625 15:47:03.679"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0, 27968.0, 94876.0, 57173.0, 46821.0] | 94247.0 ]</msg>
+<msg timestamp="20220625 15:47:03.679" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.679" endtime="20220625 15:47:03.679"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.678" endtime="20220625 15:47:03.680"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 88021, 'lastname': 'VHKACPCMGV'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.680" level="TRACE">Arguments: [ 88021 ]</msg>
+<msg timestamp="20220625 15:47:03.680" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.680" level="TRACE">Return: 88021.0</msg>
+<msg timestamp="20220625 15:47:03.680" level="INFO">${k2} = 88021.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.680" endtime="20220625 15:47:03.680"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.680" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ'] | 'VHKACPCMGV' ]</msg>
+<msg timestamp="20220625 15:47:03.680" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.680" endtime="20220625 15:47:03.680"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.681" level="TRACE">Arguments: [ [14548.0, 92018.0, 46577.0, 27968.0, 94876.0, 57173.0, 46821.0, 94247.0] | 88021.0 ]</msg>
+<msg timestamp="20220625 15:47:03.681" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.680" endtime="20220625 15:47:03.681"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.680" endtime="20220625 15:47:03.681"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 33323, 'lastname': 'UISNUVEPAT'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.681" level="TRACE">Arguments: [ 33323 ]</msg>
+<msg timestamp="20220625 15:47:03.681" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.681" level="TRACE">Return: 33323.0</msg>
+<msg timestamp="20220625 15:47:03.681" level="INFO">${k2} = 33323.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.681" endtime="20220625 15:47:03.681"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.682" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV'] | 'UISNUVEPAT' ]</msg>
+<msg timestamp="20220625 15:47:03.682" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.681" endtime="20220625 15:47:03.682"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.682" level="TRACE">Arguments: [ [14548.0,
+ 92018.0,
+ 46577.0,
+ 27968.0,
+ 94876.0,
+ 57173.0,
+ 46821.0,
+ 94247.0,
+ 88021.0] | 33323.0 ]</msg>
+<msg timestamp="20220625 15:47:03.682" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.682" endtime="20220625 15:47:03.682"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.681" endtime="20220625 15:47:03.682"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 61018, 'lastname': 'BPHXCGRCAL'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Arguments: [ 61018 ]</msg>
+<msg timestamp="20220625 15:47:03.683" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Return: 61018.0</msg>
+<msg timestamp="20220625 15:47:03.683" level="INFO">${k2} = 61018.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.682" endtime="20220625 15:47:03.683"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT'] | 'BPHXCGRCAL' ]</msg>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.683" endtime="20220625 15:47:03.683"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Arguments: [ [14548.0,
+ 92018.0,
+ 46577.0,
+ 27968.0,
+ 94876.0,
+ 57173.0,
+ 46821.0,
+ 94247.0,
+ 88021.0,
+ 33323.0] | 61018.0 ]</msg>
+<msg timestamp="20220625 15:47:03.683" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.683" endtime="20220625 15:47:03.683"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.682" endtime="20220625 15:47:03.684"/>
+</iter>
+<iter>
+<var name="${k}">{'zip': 51169, 'lastname': 'EAPTUWLGIM'}</var>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${k2}</var>
+<arg>${k}[zip]</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20220625 15:47:03.684" level="TRACE">Arguments: [ 51169 ]</msg>
+<msg timestamp="20220625 15:47:03.684" level="DEBUG">Argument types are:
+&lt;class 'int'&gt;</msg>
+<msg timestamp="20220625 15:47:03.684" level="TRACE">Return: 51169.0</msg>
+<msg timestamp="20220625 15:47:03.684" level="INFO">${k2} = 51169.0</msg>
+<status status="PASS" starttime="20220625 15:47:03.684" endtime="20220625 15:47:03.684"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${lastnames_db}</arg>
+<arg>${k}[lastname]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.684" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT',
+ 'BPHXCGRCAL'] | 'EAPTUWLGIM' ]</msg>
+<msg timestamp="20220625 15:47:03.684" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.684" endtime="20220625 15:47:03.684"/>
+</kw>
+<kw name="Append To List" library="Col">
+<arg>${zips_db}</arg>
+<arg>${k2}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<msg timestamp="20220625 15:47:03.685" level="TRACE">Arguments: [ [14548.0,
+ 92018.0,
+ 46577.0,
+ 27968.0,
+ 94876.0,
+ 57173.0,
+ 46821.0,
+ 94247.0,
+ 88021.0,
+ 33323.0,
+ 61018.0] | 51169.0 ]</msg>
+<msg timestamp="20220625 15:47:03.685" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.685" endtime="20220625 15:47:03.685"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.684" endtime="20220625 15:47:03.685"/>
+</iter>
+<status status="PASS" starttime="20220625 15:47:03.667" endtime="20220625 15:47:03.685"/>
+</for>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${lastnames}</arg>
+<arg>${lastnames_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<msg timestamp="20220625 15:47:03.685" level="TRACE">Arguments: [ ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT',
+ 'BPHXCGRCAL',
+ 'EAPTUWLGIM'] | ['LQFAMCRRWU',
+ 'JSPQUHRHNQ',
+ 'APXYQPXOPS',
+ 'ZWVATZIHSZ',
+ 'SXKCUISAYM',
+ 'KZJQHEYBZN',
+ 'EWSAPICKKO',
+ 'PECYSELKTZ',
+ 'VHKACPCMGV',
+ 'UISNUVEPAT',
+ 'BPHXCGRCAL',
+ 'EAPTUWLGIM'] ]</msg>
+<msg timestamp="20220625 15:47:03.685" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.685" endtime="20220625 15:47:03.685"/>
+</kw>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${zips}</arg>
+<arg>${zips_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<msg timestamp="20220625 15:47:03.686" level="TRACE">Arguments: [ [14548,
+ 92018,
+ 46577,
+ 27968,
+ 94876,
+ 57173,
+ 46821,
+ 94247,
+ 88021,
+ 33323,
+ 61018,
+ 51169] | [14548.0,
+ 92018.0,
+ 46577.0,
+ 27968.0,
+ 94876.0,
+ 57173.0,
+ 46821.0,
+ 94247.0,
+ 88021.0,
+ 33323.0,
+ 61018.0,
+ 51169.0] ]</msg>
+<msg timestamp="20220625 15:47:03.686" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.685" endtime="20220625 15:47:03.686"/>
+</kw>
+<msg timestamp="20220625 15:47:03.686" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.665" endtime="20220625 15:47:03.686"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.606" endtime="20220625 15:47:03.686"/>
+</test>
+<kw name="Suite Teardown" library="resource" type="TEARDOWN">
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Arguments: [  ]</msg>
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.687" level="INFO">Deleting All Sessions</msg>
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.687" endtime="20220625 15:47:03.687"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.687" endtime="20220625 15:47:03.687"/>
+</kw>
+<msg timestamp="20220625 15:47:03.687" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20220625 15:47:03.686" endtime="20220625 15:47:03.687"/>
+</kw>
+<status status="PASS" starttime="20220625 15:47:03.593" endtime="20220625 15:47:03.687"/>
+</suite>
+<status status="PASS" starttime="20220625 15:47:02.591" endtime="20220625 15:47:03.688"/>
+</suite>
+<status status="PASS" starttime="20220625 15:47:02.574" endtime="20220625 15:47:03.689"/>
+</suite>
+<statistics>
+<total>
+<stat pass="7" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="7" fail="0" skip="0" id="s1" name="Nexign homework">Nexign homework</stat>
+<stat pass="7" fail="0" skip="0" id="s1-s1" name="RF2">Nexign homework.RF2</stat>
+<stat pass="4" fail="0" skip="0" id="s1-s1-s1" name="Ddt">Nexign homework.RF2.Ddt</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s2" name="Hw 2(1)">Nexign homework.RF2.Hw 2(1)</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s3" name="Hw 2(2)">Nexign homework.RF2.Hw 2(2)</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s4" name="Lesson">Nexign homework.RF2.Lesson</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220625 15:47:02.865" level="WARN">Multiple tests with name 'Check Search One Table 400' executed in suite 'Nexign homework.RF2.Ddt'.</msg>
+</errors>
+</robot>

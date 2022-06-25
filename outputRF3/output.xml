@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on linux)" generated="20220625 21:16:15.211" rpa="false" schemaversion="3">
+<suite id="s1" name="Nexign homework" source="/home/neuro/PycharmProjects/Nexign_homework">
+<suite id="s1-s1" name="RF3" source="/home/neuro/PycharmProjects/Nexign_homework/RF3">
+<suite id="s1-s1-s1" name="Hw 3" source="/home/neuro/PycharmProjects/Nexign_homework/RF3/hw_3.robot">
+<kw name="Suite Setup" library="resource" type="SETUP">
+<kw name="Create Session" library="Req">
+<arg>alias</arg>
+<arg>http://localhost:3000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220625 21:16:15.411" level="INFO">Creating Session using : alias=alias, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220625 21:16:15.411" endtime="20220625 21:16:15.411"/>
+</kw>
+<kw name="Connect To Postgresql" library="DB">
+<arg>app_db</arg>
+<arg>app_user</arg>
+<arg>password</arg>
+<arg>localhost</arg>
+<arg>5432</arg>
+<arg>db1</arg>
+<doc>Connection to Postgres DB.</doc>
+<status status="PASS" starttime="20220625 21:16:15.411" endtime="20220625 21:16:15.418"/>
+</kw>
+<status status="PASS" starttime="20220625 21:16:15.410" endtime="20220625 21:16:15.418"/>
+</kw>
+<test id="s1-s1-s1-t1" name="Check Order ID By Order Date And Total Amount" line="15">
+<kw name="Get Order Date From PostRest">
+<var>${orderids_rest}</var>
+<var>${orderdates_rest}</var>
+<arg>arguments=totalamount=gt.300&amp;orderdate=eq.2004-01-01</arg>
+<doc>Get order_ids and order_dates by Rest</doc>
+<kw name="Get Orders From Rest" library="Order">
+<var>${orderid}</var>
+<var>${orderdate}</var>
+<arg>alias</arg>
+<arg>${arguments}</arg>
+<arg>200</arg>
+<msg timestamp="20220625 21:16:15.426" level="INFO">GET Request : url=http://localhost:3000/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ path_url=/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220625 21:16:15.426" level="INFO">GET Response : url=http://localhost:3000/orders?totalamount=gt.300&amp;orderdate=eq.2004-01-01 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Date': 'Sat, 25 Jun 2022 14:16:15 GMT', 'Server': 'postgrest/9.0.0', 'Content-Range': '0-4/*', 'Content-Location': '/orders?orderdate=eq.2004-01-01&amp;totalamount=gt.300', 'Content-Type': 'application/json; charset=utf-8'} 
+ body=[{"orderid":295,"orderdate":"2004-01-01","customerid":3099,"netamount":361.87,"tax":29.85,"totalamount":391.72}, 
+ {"orderid":305,"orderdate":"2004-01-01","customerid":17738,"netamount":397.26,"tax":32.77,"totalamount":430.03}, 
+ {"orderid":447,"orderdate":"2004-01-01","customerid":19381,"netamount":313.55,"tax":25.87,"totalamount":339.42}, 
+ {"orderid":515,"orderdate":"2004-01-01","customerid":2323,"netamount":395.80,"tax":32.65,"totalamount":428.45}, 
+ {"orderid":709,"orderdate":"2004-01-01","customerid":1595,"netamount":392.67,"tax":32.40,"totalamount":425.07}] 
+ </msg>
+<msg timestamp="20220625 21:16:15.465" level="INFO">${orderid} = [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 21:16:15.465" level="INFO">${orderdate} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<status status="PASS" starttime="20220625 21:16:15.420" endtime="20220625 21:16:15.465"/>
+</kw>
+<msg timestamp="20220625 21:16:15.465" level="INFO">${orderids_rest} = [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 21:16:15.465" level="INFO">${orderdates_rest} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<timeout value="80 milliseconds"/>
+<status status="PASS" starttime="20220625 21:16:15.419" endtime="20220625 21:16:15.465"/>
+</kw>
+<kw name="Get Order Date and Total Amount From DB">
+<var>${orderids_db}</var>
+<var>${orderdates_db}</var>
+<arg>orderdate=2004-01-01</arg>
+<arg>totalamount=300</arg>
+<doc>Get order_ids and order_dates by DB</doc>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${params}</var>
+<arg>&amp;{args}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220625 21:16:15.466" level="INFO">${params} = {'orderdate': '2004-01-01', 'totalamount': '300'}</msg>
+<status status="PASS" starttime="20220625 21:16:15.466" endtime="20220625 21:16:15.466"/>
+</kw>
+<kw name="Get Orders By Date And Total Amount" library="Order">
+<var>${result}</var>
+<arg>&amp;{params}</arg>
+<msg timestamp="20220625 21:16:15.467" level="INFO">Get orders with amount&gt;300 and orderdate=2004-01-01</msg>
+<msg timestamp="20220625 21:16:15.467" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;Running PL/PGSQL statement&lt;/summary&gt;&lt;p&gt;SELECT orderid, orderdate, totalamount
+                 FROM &amp;quot;orders&amp;quot;
+                 WHERE totalamount&amp;gt;%(totalamount)s
+                 AND orderdate=%(orderdate)s&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 21:16:15.470" level="INFO" html="true">&lt;details&gt;&lt;summary&gt;SQL Query Result&lt;/summary&gt;&lt;p&gt;[{&amp;#x27;orderid&amp;#x27;: 295, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;391.72&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 305, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;430.03&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 447, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;339.42&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 515, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;428.45&amp;#x27;)}, {&amp;#x27;orderid&amp;#x27;: 709, &amp;#x27;orderdate&amp;#x27;: datetime.date(2004, 1, 1), &amp;#x27;totalamount&amp;#x27;: Decimal(&amp;#x27;425.07&amp;#x27;)}]&lt;/p&gt;&lt;/details&gt;</msg>
+<msg timestamp="20220625 21:16:15.470" level="INFO">${result} = [{'orderid': 295, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('391.72')}, {'orderid': 305, 'orderdate': datetime.date(2004, 1, 1), 'totalamount': Decimal('430.03')}, {'orderid': 447...</msg>
+<status status="PASS" starttime="20220625 21:16:15.467" endtime="20220625 21:16:15.470"/>
+</kw>
+<kw name="Get Orders And Dates" library="Order">
+<var>${orderids_db}</var>
+<var>${orderdates_db}</var>
+<arg>data=${result}</arg>
+<msg timestamp="20220625 21:16:15.471" level="INFO">${orderids_db} = [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 21:16:15.471" level="INFO">${orderdates_db} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<status status="PASS" starttime="20220625 21:16:15.470" endtime="20220625 21:16:15.471"/>
+</kw>
+<msg timestamp="20220625 21:16:15.471" level="INFO">${orderids_db} = [295, 305, 447, 515, 709]</msg>
+<msg timestamp="20220625 21:16:15.471" level="INFO">${orderdates_db} = ['2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01', '2004-01-01']</msg>
+<timeout value="10 milliseconds"/>
+<status status="PASS" starttime="20220625 21:16:15.466" endtime="20220625 21:16:15.471"/>
+</kw>
+<kw name="Compare Order Date and Order ID From PostRest And DB">
+<arg>${orderdates_rest}</arg>
+<arg>${orderids_rest}</arg>
+<arg>${orderids_db}</arg>
+<arg>${orderdates_db}</arg>
+<doc>Compare results from Rest and DB</doc>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${orderids}</arg>
+<arg>${orderids_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<status status="PASS" starttime="20220625 21:16:15.472" endtime="20220625 21:16:15.472"/>
+</kw>
+<kw name="Lists Should Be Equal" library="Col">
+<arg>${orderdates}</arg>
+<arg>${orderdates_db}</arg>
+<doc>Fails if given lists are unequal.</doc>
+<status status="PASS" starttime="20220625 21:16:15.472" endtime="20220625 21:16:15.472"/>
+</kw>
+<timeout value="5 milliseconds"/>
+<status status="PASS" starttime="20220625 21:16:15.471" endtime="20220625 21:16:15.472"/>
+</kw>
+<doc>Total amount&gt;300 Order date=2004-01-01</doc>
+<timeout value="100 milliseconds"/>
+<status status="PASS" starttime="20220625 21:16:15.419" endtime="20220625 21:16:15.473"/>
+</test>
+<kw name="Suite Teardown" library="resource" type="TEARDOWN">
+<kw name="Delete All Sessions" library="Req">
+<doc>Removes all the session objects</doc>
+<msg timestamp="20220625 21:16:15.473" level="INFO">Deleting All Sessions</msg>
+<status status="PASS" starttime="20220625 21:16:15.473" endtime="20220625 21:16:15.473"/>
+</kw>
+<kw name="Disconnect From Postgresql" library="DB">
+<doc>Close active PostgreSQL connection.
+You will have to manually open or switch to a new connection.
+Due to how ConnectionCache works, connection's index and alias are not removed from cache, so you are able to switch to
+closed connection, if it was closed with Disconnect from Postgresql. It will still remain closed though.</doc>
+<status status="PASS" starttime="20220625 21:16:15.474" endtime="20220625 21:16:15.474"/>
+</kw>
+<status status="PASS" starttime="20220625 21:16:15.473" endtime="20220625 21:16:15.474"/>
+</kw>
+<meta name="Author">Logvinov Nikita</meta>
+<meta name="Message">Checking expected identity of results from DB and Rest
+Ставил минимальные значения для timeout. Не знаю насколько скорость выполнения зависит от железа</meta>
+<status status="PASS" starttime="20220625 21:16:15.232" endtime="20220625 21:16:15.474"/>
+</suite>
+<status status="PASS" starttime="20220625 21:16:15.230" endtime="20220625 21:16:15.475"/>
+</suite>
+<status status="PASS" starttime="20220625 21:16:15.213" endtime="20220625 21:16:15.475"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Nexign homework">Nexign homework</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="RF3">Nexign homework.RF3</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="Hw 3">Nexign homework.RF3.Hw 3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
